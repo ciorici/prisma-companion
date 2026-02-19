@@ -1,9 +1,9 @@
 === Prisma Companion ===
 Contributors: prismacore
 Tags: blocks, custom blocks, widgets, demos, demo template, demo website, gutenberg, prisma-core
-Requires at least: 6.0
-Tested up to: 6.7
-Stable tag: 2.0.0
+Requires at least: 6.4
+Tested up to: 6.9
+Stable tag: 2.0.1
 Requires PHP: 7.4
 License: GNU General Public License v2.0 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -33,26 +33,6 @@ Prisma Companion is a companion plugin for the [Prisma Core](https://github.com/
 
 == Changelog ==
 
-= 1.0.5 =
-* Updated: WordPress 6.3 compatibility.
-
-= 1.0.4 =
-* Updated: "Posts List" widget compatibility with the updated SVG icon system.
-* Updated: "Custom List" widget compatibility with the updated SVG icons system.
-
-= 1.0.3 =
-* Added: Option to control "Social Links" widget size.
-* Improved: CSS enhancements.
-
-= 1.0.2 =
-* Added: WP CLI command to import a page.
-
-= 1.0.1 =
-* Added: Missing options in Demo Import/Export.
-* Fixed: Homepage in Menu not importing correctly.
-* Fixed: WPForms block not importing correctly.
-* Fixed: Remapping URLs in imported content to link to files.
-* Improved: Demo Import/Export check for updated import files.
 
 = 1.0.0 =
-* Initial release 🚀
+* Initial release
