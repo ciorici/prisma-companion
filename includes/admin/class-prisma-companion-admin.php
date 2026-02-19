@@ -120,7 +120,7 @@ final class Prisma_Companion_Admin {
 			apply_filters( 'prisma_core_manage_cap', 'edit_theme_options' ), // phpcs:ignore
 			'prisma-core-dashboard',
 			array( prisma_core_dashboard(), 'render_dashboard' ),
-			'dashicons-pc-brand',
+			'data:image/svg+xml;base64,' . base64_encode( '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="black" d="M6.5 2A1.5 1.5 0 0 0 5 3.5v13a1.5 1.5 0 0 0 3 0V13h2.5c3.04 0 5.5-2.46 5.5-5.5S13.54 2 10.5 2H6.5zM8 5h2.5a2.5 2.5 0 0 1 0 5H8V5z"/></svg>' ),
 			apply_filters( 'prisma_core_menu_position', '999.2' ) // phpcs:ignore
 		);
 
@@ -186,15 +186,7 @@ final class Prisma_Companion_Admin {
 	 * @since 1.0.0
 	 */
 	public function enqueue() {
-
-		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-
-		wp_enqueue_style(
-			'prisma-companion-dashicon',
-			PRISMA_COMPANION_PLUGIN_URL . 'assets/css/admin-dashicon' . $suffix . '.css',
-			null,
-			PRISMA_COMPANION_VERSION
-		);
+		// Menu icon is now an inline SVG data URI — no dashicon font needed.
 	}
 
 	/**
