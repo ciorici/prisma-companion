@@ -1,29 +1,18 @@
 <?php
 /**
  * Plugin Name: Prisma Companion
- * Plugin URI:  https://github.com/ciorici/prisma-core
+ * Plugin URI:  https://github.com/wpzoom/prisma-core
  * Description: Additional features for Prisma Core WordPress Theme.
- * Author:      Prisma Core Team
- * Author URI:  https://github.com/ciorici/prisma-core
+ * Author:      WPZOOM
+ * Author URI: https://www.wpzoom.com
  * Version:     1.0.0
  * Text Domain: prisma-companion
  * Domain Path: languages
- *
- * Prisma Companion is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * any later version.
- *
- * Prisma Companion is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Social Snap. If not, see <http://www.gnu.org/licenses/>.
+ * Requires at least: 6.4
+ * Requires PHP: 7.4
  *
  * @package    Prisma Companion
- * @author     Prisma Core Team
+ * @author     WPZOOM
  * @since      1.0.0
  * @license    GPL-3.0+
  * @copyright  Copyright (c) 2018, Sinatra Team. 2025, Prisma Core Team

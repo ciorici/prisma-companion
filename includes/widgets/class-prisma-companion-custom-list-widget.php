@@ -187,7 +187,7 @@ class Prisma_Companion_Custom_List_Widget extends WP_Widget {
 					echo wp_kses_post(
 						sprintf(
 							_x( 'HTML tags and %1$sdynamic strings%2$s allowed.', 'Widget', 'prisma-core' ),
-							'<a href="https://github.com/ciorici/prisma-core/docs/prisma-dynamic-strings/" rel="nofollow noreferrer" target="_blank">',
+							'<a href="https://github.com/wpzoom/prisma-core/docs/prisma-dynamic-strings/" rel="nofollow noreferrer" target="_blank">',
 							'</a>'
 						)
 					);

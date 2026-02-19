@@ -1,5 +1,5 @@
 === Prisma Companion ===
-Contributors: ciorici
+Contributors: wpzoom
 Tags: blocks, custom blocks, widgets, demos, demo template, demo website, gutenberg, prisma-core
 Requires at least: 6.4
 Tested up to: 6.9
@@ -10,7 +10,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Prisma Companion is an optional companion plugin for [Prisma Core](https://github.com/ciorici/prisma-core) theme. It adds additional features such as widgets, blocks and a collection of pre-built websites (demos) for popular page builders and the WordPress block editor (Gutenberg).
+Prisma Companion is an optional companion plugin for [Prisma Core](https://github.com/wpzoom/prisma-core) theme. It adds additional features such as widgets, blocks and a collection of pre-built websites (demos) for popular page builders and the WordPress block editor (Gutenberg).
 
 == Installation ==
 
@@ -29,7 +29,7 @@ In the search field type "Prisma Companion" and click Search Plugins. Once youâ€
 
 = I installed the plugin but nothing happened =
 
-Prisma Companion is a companion plugin for the [Prisma Core](https://github.com/ciorici/prisma-core) theme and will only work with the theme installed and activated.
+Prisma Companion is a companion plugin for the [Prisma Core](https://github.com/wpzoom/prisma-core) theme and will only work with the theme installed and activated.
 
 == Changelog ==
 
