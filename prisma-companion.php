@@ -5,7 +5,7 @@
  * Description: Additional features for Prisma Core WordPress Theme.
  * Author:      Prisma Core Team
  * Author URI:  https://github.com/ciorici/prisma-core
- * Version:     2.0.1
+ * Version:     1.0.0
  * Text Domain: prisma-companion
  * Domain Path: languages
  *
