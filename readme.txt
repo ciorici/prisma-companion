@@ -35,4 +35,5 @@ Prisma Companion is a companion plugin for the [Prisma Core](https://github.com/
 
 
 = 1.0.0 =
-* Initial release
+* Renamed plugin from Sinatra Core to Prisma Companion
+* Replaced dead sinatrawp.com API URLs
