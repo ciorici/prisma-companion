@@ -85,7 +85,7 @@ final class Prisma_Companion_Demo_Library_Page {
 		prisma_core_dashboard()->render_navigation();
 
 		?>
-		<div class="pc-container">
+		<div class="pr-container">
 
 			<div class="prisma-core-section-title">
 				<h2 class="prisma-core-section-title"><?php esc_html_e( 'Demo Library', 'prisma-companion' ); ?></h2>
@@ -95,7 +95,7 @@ final class Prisma_Companion_Demo_Library_Page {
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
 				</div>
 
-				<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=prisma-core-demo-library' ), 'refresh_templates', 'prisma_companion_nonce' ) ); ?>" class="pc-btn secondary"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg><?php esc_html_e( 'Refresh', 'prisma-companion' ); ?></a>
+				<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=prisma-core-demo-library' ), 'refresh_templates', 'prisma_companion_nonce' ) ); ?>" class="pr-btn secondary"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg><?php esc_html_e( 'Refresh', 'prisma-companion' ); ?></a>
 			</div><!-- END .prisma-core-section-title -->
 
 			<div class="demo-filters">
@@ -168,8 +168,8 @@ final class Prisma_Companion_Demo_Library_Page {
 							<span class="name">{{{data.name}}}</span>
 						</div>
 						<div class="demo-actions">
-							<a class="pc-btn primary btn-small import" href="#" aria-label="<?php esc_attr_e( 'Import', 'prisma-companion' ); ?> {{data.name}}"><?php esc_html_e( 'Import Demo', 'prisma-companion' ); ?></a>
-							<a class="pc-btn secondary btn-small preview" href="#" aria-label="<?php esc_attr_e( 'Preview', 'prisma-companion' ); ?> {{data.name}}"><?php esc_html_e( 'Preview', 'prisma-companion' ); ?></a>
+							<a class="pr-btn primary btn-small import" href="#" aria-label="<?php esc_attr_e( 'Import', 'prisma-companion' ); ?> {{data.name}}"><?php esc_html_e( 'Import Demo', 'prisma-companion' ); ?></a>
+							<a class="pr-btn secondary btn-small preview" href="#" aria-label="<?php esc_attr_e( 'Preview', 'prisma-companion' ); ?> {{data.name}}"><?php esc_html_e( 'Preview', 'prisma-companion' ); ?></a>
 						</div>
 					</div>
 				</div>
@@ -197,7 +197,7 @@ final class Prisma_Companion_Demo_Library_Page {
 						<button class="previous-theme"><span class="screen-reader-text"><?php esc_html_e( 'Previous', 'prisma-companion' ); ?></span></button>
 						<button class="next-theme"><span class="screen-reader-text"><?php esc_html_e( 'Next', 'prisma-companion' ); ?></span></button>
 						<span class="spinner"></span>
-						<a class="pc-btn primary hide-if-no-customize prisma-companion-demo-import" href="#" disabled="disabled">
+						<a class="pr-btn primary hide-if-no-customize prisma-companion-demo-import" href="#" disabled="disabled">
 							<?php esc_html_e( 'Import Demo', 'prisma-companion' ); ?>
 						</a>
 
@@ -306,7 +306,7 @@ final class Prisma_Companion_Demo_Library_Page {
 
 					<div class="wp-full-overlay-footer">
 						<div class="footer-import-button-wrap">
-							<a class="pc-btn primary large-button hide-if-no-customize prisma-companion-demo-import" href="#" disabled="disabled">
+							<a class="pr-btn primary large-button hide-if-no-customize prisma-companion-demo-import" href="#" disabled="disabled">
 								<span class="spinner pc-spinner"></span>
 								<span class="status"><?php esc_html_e( 'Import Demo', 'prisma-companion' ); ?></span>
 								<span class="percent"></span>

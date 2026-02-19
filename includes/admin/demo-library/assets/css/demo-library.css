@@ -10,7 +10,7 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.theme-install-overlay .wp-full-overlay-sidebar .wp-full-overlay-header .pc-btn {
+.theme-install-overlay .wp-full-overlay-sidebar .wp-full-overlay-header .pr-btn {
   margin: 7px 12px 7px auto;
   float: none;
 }
@@ -47,10 +47,10 @@
   border-bottom: 1px solid #ddd;
   padding: 20px;
 }
-.footer-import-button-wrap .pc-btn {
+.footer-import-button-wrap .pr-btn {
   z-index: 2;
 }
-.footer-import-button-wrap .pc-btn:before, .footer-import-button-wrap .pc-btn:after {
+.footer-import-button-wrap .pr-btn:before, .footer-import-button-wrap .pr-btn:after {
   content: "";
   display: block;
   position: absolute;
@@ -62,13 +62,13 @@
   -webkit-box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff;
           box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff;
 }
-.footer-import-button-wrap .pc-btn:after {
+.footer-import-button-wrap .pr-btn:after {
   -webkit-animation-delay: 1.5s, 1.5s;
           animation-delay: 1.5s, 1.5s;
   margin-top: 30%;
   left: 0;
 }
-.footer-import-button-wrap .pc-btn.animate:before, .footer-import-button-wrap .pc-btn.animate:after {
+.footer-import-button-wrap .pr-btn.animate:before, .footer-import-button-wrap .pr-btn.animate:after {
   -webkit-animation: 1s bang ease-out 1 backwards, 1s gravity ease-in 1 backwards;
           animation: 1s bang ease-out 1 backwards, 1s gravity ease-in 1 backwards;
 }
@@ -171,11 +171,11 @@
   bottom: 129px;
 }
 
-body.importing .prisma-companion-demo-preview .pc-btn {
+body.importing .prisma-companion-demo-preview .pr-btn {
   pointer-events: none;
   background: #656a6f !important;
 }
-body.importing .prisma-companion-demo-preview .pc-btn .spinner {
+body.importing .prisma-companion-demo-preview .pr-btn .spinner {
   display: inline-block;
   visibility: visible;
   margin-top: 0;
@@ -185,7 +185,7 @@ body.importing .prisma-companion-demo-preview .pc-btn .spinner {
 body.importing .prisma-companion-demo-preview .wp-full-overlay-header .spinner {
   margin: 0 0 0 auto;
 }
-body.importing .prisma-companion-demo-preview .wp-full-overlay-header .pc-btn {
+body.importing .prisma-companion-demo-preview .wp-full-overlay-header .pr-btn {
   margin-left: 12px;
 }
 body.importing .prisma-companion-demo-preview #pc-progress-bar {
@@ -210,11 +210,11 @@ body.importing .prisma-companion-demo-preview .wp-full-overlay-header .spinner {
   height: 129px;
   line-height: 1;
 }
-.expanded .wp-full-overlay-footer .pc-btn {
+.expanded .wp-full-overlay-footer .pr-btn {
   position: relative;
   width: 100%;
 }
-.expanded .wp-full-overlay-footer .pc-btn .spinner.pc-spinner {
+.expanded .wp-full-overlay-footer .pr-btn .spinner.pc-spinner {
   position: absolute;
   left: 12px;
   opacity: 1;
@@ -646,7 +646,7 @@ div.prisma-core-section-title {
       -ms-flex-align: center;
           align-items: center;
 }
-div.prisma-core-section-title .pc-btn {
+div.prisma-core-section-title .pr-btn {
   margin-left: 12px;
 }
 
