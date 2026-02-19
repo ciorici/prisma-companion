@@ -50,7 +50,7 @@ final class Prisma_Companion_Demo_Library_Page {
 	public function __construct() {
 
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ), 100 );
-		add_action( 'admin_print_footer_scripts-prisma_core_page_prisma-core-demo-library', array( $this, 'print_templates' ) );
+		add_action( 'admin_print_footer_scripts-prisma-core_page_prisma-core-demo-library', array( $this, 'print_templates' ) );
 		add_filter( 'prisma_core_admin_page_tabs', array( $this, 'add_admin_page_tabs' ) );
 		add_filter( 'prisma_core_dashboard_navigation_items', array( $this, 'update_navigation_items' ) );
 

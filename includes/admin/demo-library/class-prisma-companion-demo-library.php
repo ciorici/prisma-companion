@@ -105,7 +105,7 @@ final class Prisma_Companion_Demo_Library {
 	 */
 	public function admin_enqueue( $hook = '' ) {
 
-		if ( 'prisma_core_page_prisma-core-demo-library' !== $hook ) {
+		if ( 'prisma-core_page_prisma-core-demo-library' !== $hook ) {
 			return;
 		}
 

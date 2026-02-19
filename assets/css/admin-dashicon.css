@@ -5,7 +5,7 @@
   font-weight: normal;
   font-style: normal;
 }
-.dashicons-si-brand:before {
+.dashicons-pc-brand:before {
   font-family: "prisma-companion-dashicon" !important;
   content: "\e900" !important;
   font-size: 13px !important;

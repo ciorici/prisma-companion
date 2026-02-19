@@ -120,7 +120,7 @@ final class Prisma_Companion_Admin {
 			apply_filters( 'prisma_core_manage_cap', 'edit_theme_options' ), // phpcs:ignore
 			'prisma-core-dashboard',
 			array( prisma_core_dashboard(), 'render_dashboard' ),
-			'dashicons-si-brand',
+			'dashicons-pc-brand',
 			apply_filters( 'prisma_core_menu_position', '999.2' ) // phpcs:ignore
 		);
 
