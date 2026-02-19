@@ -190,28 +190,13 @@ final class Prisma_Companion_Admin {
 	}
 
 	/**
-	 * Enqueue admin scripts and styles.
+	 * Render plugin changelog section.
 	 *
 	 * @since 1.0.0
 	 */
 	public function changelog() {
 
-		$changelog = PRISMA_COMPANION_PLUGIN_DIR . '/changelog.txt';
-
-		if ( ! file_exists( $changelog ) ) {
-			$changelog = esc_html__( 'Changelog file not found.', 'prisma-companion' );
-		} elseif ( ! is_readable( $changelog ) ) {
-			$changelog = esc_html__( 'Changelog file not readable.', 'prisma-companion' );
-		} else {
-			global $wp_filesystem;
-
-			// Check if the the global filesystem isn't setup yet.
-			if ( is_null( $wp_filesystem ) ) {
-				WP_Filesystem();
-			}
-
-			$changelog = $wp_filesystem->get_contents( $changelog );
-		}
+		$changelog = $this->get_changelog_from_readme();
 
 		?>
 		<div class="prisma-core-section-title prisma-companion-changelog">
@@ -231,6 +216,29 @@ final class Prisma_Companion_Admin {
 			</div>
 		</div><!-- END .prisma-core-columns -->
 		<?php
+	}
+
+	/**
+	 * Extract the Changelog section from readme.txt.
+	 *
+	 * @since 2.0.1
+	 * @return string Changelog text.
+	 */
+	private function get_changelog_from_readme() {
+		$readme = PRISMA_COMPANION_PLUGIN_DIR . '/readme.txt';
+
+		if ( ! file_exists( $readme ) || ! is_readable( $readme ) ) {
+			return esc_html__( 'Changelog not available.', 'prisma-companion' );
+		}
+
+		$contents = file_get_contents( $readme ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+
+		// Extract text between "== Changelog ==" and the next "== " section (or end of file).
+		if ( preg_match( '/== Changelog ==\s*\n(.*?)(?=\n== |\z)/s', $contents, $matches ) ) {
+			return trim( $matches[1] );
+		}
+
+		return esc_html__( 'Changelog not available.', 'prisma-companion' );
 	}
 
 	/**
