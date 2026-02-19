@@ -22,9 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 function prisma_companion_get_widgets() {
 
 	$widgets = array(
-		'prisma-companion-custom-list-widget'  => 'Prisma_Companion_Custom_List_Widget',
-		'prisma-companion-social-links-widget' => 'Prisma_Companion_Social_Links_Widget',
-		'prisma-companion-posts-list-widget'   => 'Prisma_Companion_Posts_List_Widget',
+		'prisma-companion-custom-list-widget' => 'Prisma_Companion_Custom_List_Widget',
+		'prisma-companion-posts-list-widget'  => 'Prisma_Companion_Posts_List_Widget',
 	);
 
 	return apply_filters( 'prisma_companion_widgets', $widgets );
