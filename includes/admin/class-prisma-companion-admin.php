@@ -280,15 +280,15 @@ final class Prisma_Companion_Admin {
 			$remote = json_decode( $body, true );
 
 			if ( is_array( $remote ) && ! empty( $remote ) ) {
-				$plugins = $remote;
-				set_site_transient( 'prisma_core_check_plugin_update', $plugins, 60 * 60 * 24 * 3 );
+				set_site_transient( 'prisma_core_check_plugin_update', $remote, 60 * 60 * 24 * 3 );
+				$plugins = array_merge( $plugins, $remote );
 			} else {
 				set_site_transient( 'prisma_core_check_plugin_update', 'error', 60 * 60 * 24 * 30 );
 			}
 		} elseif ( 'error' === $remote ) {
 			return $plugins;
 		} else {
-			$plugins = $remote;
+			$plugins = array_merge( $plugins, $remote );
 		}
 
 		return $plugins;
