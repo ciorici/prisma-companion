@@ -1,12 +1,12 @@
 <?php
 /**
- * Sinatra Core: Posts List widget.
+ * Prisma Companion: Posts List widget.
  *
- * @package Sinatra Core
- * @author  Sinatra Team <hello@sinatrawp.com>
+ * @package Prisma Companion
+ * @author  Prisma Core Team
  * @since   1.0.0
  */
-class Sinatra_Core_Posts_List_Widget extends WP_Widget {
+class Prisma_Companion_Posts_List_Widget extends WP_Widget {
 
 	/**
 	 * Holds widget settings defaults, populated in constructor.
@@ -34,12 +34,12 @@ class Sinatra_Core_Posts_List_Widget extends WP_Widget {
 		);
 
 		// Widget Slug.
-		$widget_slug = 'sinatra-core-posts-list-widget';
+		$widget_slug = 'prisma-companion-posts-list-widget';
 
 		// Widget basics.
 		$widget_ops = array(
 			'classname'   => $widget_slug,
-			'description' => _x( 'Displays a configurable list of your site’s posts.', 'Widget', 'sinatra-core' ),
+			'description' => _x( 'Displays a configurable list of your site’s posts.', 'Widget', 'prisma-companion' ),
 		);
 
 		// Widget controls.
@@ -48,10 +48,10 @@ class Sinatra_Core_Posts_List_Widget extends WP_Widget {
 		);
 
 		// Load widget.
-		parent::__construct( $widget_slug, _x( '[Sinatra] Posts List', 'Widget', 'sinatra-core' ), $widget_ops, $control_ops );
+		parent::__construct( $widget_slug, _x( '[Prisma] Posts List', 'Widget', 'prisma-companion' ), $widget_ops, $control_ops );
 
 		// Hook into dynamic styles.
-		add_filter( 'sinatra_dynamic_styles', array( $this, 'dynamic_styles' ) );
+		add_filter( 'prisma_core_dynamic_styles', array( $this, 'dynamic_styles' ) );
 
 	}
 
@@ -69,7 +69,7 @@ class Sinatra_Core_Posts_List_Widget extends WP_Widget {
 
 		echo wp_kses_post( $args['before_widget'] );
 
-		do_action( 'sinatra_before_posts_list_widget', $instance );
+		do_action( 'prisma_core_before_posts_list_widget', $instance );
 
 		// Title.
 		if ( ! empty( $instance['title'] ) ) {
@@ -85,7 +85,7 @@ class Sinatra_Core_Posts_List_Widget extends WP_Widget {
 			'ignore_sticky_posts' => true,
 		);
 
-		$query_args = apply_filters( 'sinatra_core_widget_posts_list_query_args', $query_args, $args, $instance );
+		$query_args = apply_filters( 'prisma_companion_widget_posts_list_query_args', $query_args, $args, $instance );
 
 		$posts = new WP_Query( $query_args );
 
@@ -94,21 +94,21 @@ class Sinatra_Core_Posts_List_Widget extends WP_Widget {
 			while ( $posts->have_posts() ) :
 				$posts->the_post();
 
-				echo '<div class="si-posts-list-widget">';
+				echo '<div class="pc-posts-list-widget">';
 
 				if ( $instance['show_thumb'] ) {
 
-					$post_thumbnail = sinatra_get_post_thumbnail( get_the_ID(), array( 75, 75 ), true );
-					$post_thumbnail = apply_filters( 'sinatra_core_opsts_list_widget_thumbnail', $post_thumbnail, get_the_ID() );
+					$post_thumbnail = prisma_core_get_post_thumbnail( get_the_ID(), array( 75, 75 ), true );
+					$post_thumbnail = apply_filters( 'prisma_companion_opsts_list_widget_thumbnail', $post_thumbnail, get_the_ID() );
 
 					if ( ! empty( $post_thumbnail ) ) {
-						echo '<div class="si-posts-list-widget-thumb"><a href="' . esc_url( get_permalink() ) . '">' . $post_thumbnail . '</a></div>';
+						echo '<div class="pc-posts-list-widget-thumb"><a href="' . esc_url( get_permalink() ) . '">' . $post_thumbnail . '</a></div>';
 					}
 				}
 
-				echo '<div class="si-posts-list-widget-details">';
+				echo '<div class="pc-posts-list-widget-details">';
 
-				echo '<div class="si-posts-list-widget-title">';
+				echo '<div class="pc-posts-list-widget-title">';
 
 				echo '<a href="' . esc_url( get_permalink() ) . '" title="' . esc_attr( get_the_title() ) . '">' . wp_trim_words( wp_kses_post( get_the_title() ), 10, '&hellip;' ) . '</a>';
 
@@ -118,23 +118,23 @@ class Sinatra_Core_Posts_List_Widget extends WP_Widget {
 
 				if ( $instance['show_date'] ) {
 
-					$date_icon = '<i class="si-icon si-clock"></i>';
+					$date_icon = '<i class="pc-icon pc-clock"></i>';
 
-					if ( version_compare( SINATRA_THEME_VERSION, '1.2.0', '>=' ) ) {
-						$date_icon = sinatra()->icons->get_svg( 'clock' );
+					if ( version_compare( PRISMA_CORE_THEME_VERSION, '1.2.0', '>=' ) ) {
+						$date_icon = prisma_core()->icons->get_svg( 'clock' );
 					}
 
-					$post_meta .= '<span class="si-posts-list-widget-date si-flex-center">' . $date_icon . get_the_time( get_option( 'date_format' ) ) . '</span>';
+					$post_meta .= '<span class="pc-posts-list-widget-date pc-flex-center">' . $date_icon . get_the_time( get_option( 'date_format' ) ) . '</span>';
 				}
 
 				if ( $instance['show_category'] ) {
-					$post_meta .= '<span class="si-posts-list-widget-categories">' . sinatra_entry_meta_category( ', ', true, true ) . '</span>';
+					$post_meta .= '<span class="pc-posts-list-widget-categories">' . prisma_core_entry_meta_category( ', ', true, true ) . '</span>';
 				}
 
-				$post_meta = apply_filters( 'sinatra_core_posts_list_widget_meta', $post_meta, get_the_ID() );
+				$post_meta = apply_filters( 'prisma_companion_posts_list_widget_meta', $post_meta, get_the_ID() );
 
 				if ( ! empty( $post_meta ) ) {
-					echo '<div class="si-posts-list-widget-meta">' . wp_kses( $post_meta, sinatra_get_allowed_html_tags() ) . '</div>';
+					echo '<div class="pc-posts-list-widget-meta">' . wp_kses( $post_meta, prisma_core_get_allowed_html_tags() ) . '</div>';
 				}
 
 				echo '</div>';
@@ -145,7 +145,7 @@ class Sinatra_Core_Posts_List_Widget extends WP_Widget {
 			wp_reset_postdata();
 		endif;
 
-		do_action( 'sinatra_after_posts_list_widget', $instance );
+		do_action( 'prisma_core_after_posts_list_widget', $instance );
 
 		echo wp_kses_post( $args['after_widget'] );
 	}
@@ -186,45 +186,45 @@ class Sinatra_Core_Posts_List_Widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, $this->defaults );
 
 		?>
-		<div class="si-posts-list-widget si-widget">
+		<div class="pc-posts-list-widget pc-widget">
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-					<?php echo esc_html_x( 'Title:', 'Widget', 'sinatra-core' ); ?>
+					<?php echo esc_html_x( 'Title:', 'Widget', 'prisma-companion' ); ?>
 				</label>
 				<input type="text" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" class="widefat"/>
 			</p>
 
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>">
-					<?php echo esc_html_x( 'Number of posts to show:', 'Widget', 'sinatra-core' ); ?>
+					<?php echo esc_html_x( 'Number of posts to show:', 'Widget', 'prisma-companion' ); ?>
 				</label>
 				<input class="tiny-text" id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'number' ) ); ?>" type="number" step="1" min="1" value="5" size="3" />
 			</p>
 
 			<p>
 				<input class="checkbox" type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'show_thumb' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_thumb' ) ); ?>" <?php checked( $instance['show_thumb'], true ); ?>>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'show_thumb' ) ); ?>"><?php echo esc_html_x( 'Display thumbnail', 'sinatra-core' ); ?></label>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'show_thumb' ) ); ?>"><?php echo esc_html_x( 'Display thumbnail', 'prisma-companion' ); ?></label>
 				<br/>
 				<input class="checkbox" type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_date' ) ); ?>" <?php checked( $instance['show_date'], true ); ?>>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>"><?php echo esc_html_x( 'Display post date', 'sinatra-core' ); ?></label>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>"><?php echo esc_html_x( 'Display post date', 'prisma-companion' ); ?></label>
 				<br/>
 				<input class="checkbox" type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'show_category' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_category' ) ); ?>" <?php checked( $instance['show_category'], true ); ?>>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'show_category' ) ); ?>"><?php echo esc_html_x( 'Display post categories', 'sinatra-core' ); ?></label>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'show_category' ) ); ?>"><?php echo esc_html_x( 'Display post categories', 'prisma-companion' ); ?></label>
 			</p>
 
 			<p>
-				<label for="<?php echo esc_attr( $this->get_field_id( 'orderby' ) ); ?>"><?php echo esc_html_x( 'Sort by:', 'sinatra-core' ); ?></label>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'orderby' ) ); ?>"><?php echo esc_html_x( 'Sort by:', 'prisma-companion' ); ?></label>
 				<select id="<?php echo $this->get_field_id( 'orderby' ); ?>" name="<?php echo $this->get_field_name( 'orderby' ); ?>">
-					<option value="date" <?php selected( $instance['orderby'], 'date' ); ?>><?php echo esc_html_x( 'Date (Latest posts)', 'Widget', 'sinatra-core' ); ?></option>
-					<option value="modified" <?php selected( $instance['orderby'], 'modified' ); ?>><?php echo esc_html_x( 'Modified (Recently updated)', 'Widget', 'sinatra-core' ); ?></option>
-					<option value="comment_count" <?php selected( $instance['orderby'], 'comment_count' ); ?>><?php echo esc_html_x( 'Comment count (Most popular)', 'Widget', 'sinatra-core' ); ?></option>
-					<option value="menu_order" <?php selected( $instance['orderby'], 'menu_order' ); ?>><?php echo esc_html_x( 'Menu Order (Custom order)', 'Widget', 'sinatra-core' ); ?></option>
+					<option value="date" <?php selected( $instance['orderby'], 'date' ); ?>><?php echo esc_html_x( 'Date (Latest posts)', 'Widget', 'prisma-companion' ); ?></option>
+					<option value="modified" <?php selected( $instance['orderby'], 'modified' ); ?>><?php echo esc_html_x( 'Modified (Recently updated)', 'Widget', 'prisma-companion' ); ?></option>
+					<option value="comment_count" <?php selected( $instance['orderby'], 'comment_count' ); ?>><?php echo esc_html_x( 'Comment count (Most popular)', 'Widget', 'prisma-companion' ); ?></option>
+					<option value="menu_order" <?php selected( $instance['orderby'], 'menu_order' ); ?>><?php echo esc_html_x( 'Menu Order (Custom order)', 'Widget', 'prisma-companion' ); ?></option>
 				</select>
 			</p>
 
 			<?php
-			if ( function_exists( 'sinatra_help_link' ) ) {
-				sinatra_help_link( array( 'link' => 'https://sinatrawp.com/docs/posts-list-widget/' ) );
+			if ( function_exists( 'prisma_core_help_link' ) ) {
+				prisma_core_help_link( array( 'link' => 'https://github.com/ciorici/prisma-core/docs/posts-list-widget/' ) );
 			}
 			?>
 
@@ -233,14 +233,14 @@ class Sinatra_Core_Posts_List_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Hook into Sinatra dynamic styles.
+	 * Hook into Prisma Core dynamic styles.
 	 *
 	 * @param  string $css Generated CSS code.
 	 * @return string Modified CSS code.
 	 */
 	function dynamic_styles( $css ) {
-		$css .= '#main .si-posts-list-widget-meta {
-			color: ' . sinatra_hex2rgba( sinatra_option( 'content_text_color' ), 0.75 ) . ';
+		$css .= '#main .pc-posts-list-widget-meta {
+			color: ' . prisma_core_hex2rgba( prisma_core_option( 'content_text_color' ), 0.75 ) . ';
 		}';
 
 		return $css;

@@ -1,9 +1,9 @@
 <?php
 /**
- * Sinatra Demo Library. Install a copy of a Sinatra demo to your website.
+ * Prisma Companion Demo Library. Install a copy of a Prisma Core demo to your website.
  *
- * @package Sinatra Core
- * @author  Sinatra Team <hello@sinatrawp.com>
+ * @package Prisma Companion
+ * @author  Prisma Core Team
  * @since   1.0.0
  */
 
@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Sinatra Core Customizer Import/Export.
+ * Prisma Companion Customizer Import/Export.
  *
  * @since 1.0.0
- * @package Sinatra Core
+ * @package Prisma Companion
  */
-final class Sinatra_Customizer_Import_Export {
+final class Prisma_Companion_Customizer_Import_Export {
 
 	/**
 	 * Singleton instance of the class.
@@ -29,14 +29,14 @@ final class Sinatra_Customizer_Import_Export {
 	private static $instance;
 
 	/**
-	 * Main Sinatra_Customizer_Import_Export Instance.
+	 * Main Prisma_Companion_Customizer_Import_Export Instance.
 	 *
 	 * @since 1.0.0
-	 * @return Sinatra_Customizer_Import_Export
+	 * @return Prisma_Companion_Customizer_Import_Export
 	 */
 	public static function instance() {
 
-		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Sinatra_Customizer_Import_Export ) ) {
+		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Prisma_Companion_Customizer_Import_Export ) ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -61,14 +61,14 @@ final class Sinatra_Customizer_Import_Export {
 		// Have valid data?
 		// If no data or could not decode.
 		if ( empty( $data ) || ! is_array( $data ) ) {
-			return new WP_Error( esc_html__( 'Import data could not be read. Please try a different file.', 'sinatra-core' ) );
+			return new WP_Error( esc_html__( 'Import data could not be read. Please try a different file.', 'prisma-companion' ) );
 		}
 
 		// Hook before import.
-		do_action( 'sinatra_core_before_customizer_import' );
+		do_action( 'prisma_companion_before_customizer_import' );
 
 		$data = self::remap_urls( $data );
-		$data = apply_filters( 'sinatra_core_customizer_import_data', $data );
+		$data = apply_filters( 'prisma_companion_customizer_import_data', $data );
 
 		// Theme Mods.
 		if ( isset( $data['theme_mod'] ) ) {
@@ -90,7 +90,7 @@ final class Sinatra_Customizer_Import_Export {
 		}
 
 		// Hook after import.
-		do_action( 'sinatra_core_after_customizer_import' );
+		do_action( 'prisma_companion_after_customizer_import' );
 	}
 
 	/**
@@ -103,15 +103,15 @@ final class Sinatra_Customizer_Import_Export {
 		// Export data.
 		$data = array();
 
-		// Sinatra settings.
-		$customizer = array_keys( sinatra()->options->get_defaults() );
+		// Prisma Core settings.
+		$customizer = array_keys( prisma_core()->options->get_defaults() );
 
 		if ( ! empty( $customizer ) ) {
 			foreach ( $customizer as $id ) {
 
-				$id = str_replace( 'sinatra_', '', $id );
+				$id = str_replace( 'prisma_core_', '', $id );
 
-				$data['theme_mod'][ 'sinatra_' . $id ] = sinatra_option( $id );
+				$data['theme_mod'][ 'prisma_core_' . $id ] = prisma_core_option( $id );
 			}
 		}
 
@@ -122,7 +122,7 @@ final class Sinatra_Customizer_Import_Export {
 			$data['custom_css'] = $custom_css;
 		}
 
-		$data = apply_filters( 'sinatra_customizer_export_data', $data );
+		$data = apply_filters( 'prisma_core_customizer_export_data', $data );
 		$data = wp_json_encode( $data );
 
 		$filesize = strlen( $data );
@@ -157,7 +157,7 @@ final class Sinatra_Customizer_Import_Export {
 			if ( is_array( $options ) ) {
 				foreach ( $options as $id => $value ) {
 					if ( isset( $value['background-image'] ) ) {
-						$image = (object) sinatra_demo_importer()->sideload_image( $value['background-image'] );
+						$image = (object) prisma_companion_demo_importer()->sideload_image( $value['background-image'] );
 
 						if ( ! is_wp_error( $image ) ) {
 							if ( isset( $image->attachment_id ) && ! empty( $image->attachment_id ) ) {

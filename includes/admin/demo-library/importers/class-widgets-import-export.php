@@ -1,9 +1,9 @@
 <?php
 /**
- * Sinatra Demo Library. Install a copy of a Sinatra demo to your website.
+ * Prisma Companion Demo Library. Install a copy of a Prisma Core demo to your website.
  *
- * @package Sinatra Core
- * @author  Sinatra Team <hello@sinatrawp.com>
+ * @package Prisma Companion
+ * @author  Prisma Core Team
  * @since   1.0.0
  */
 
@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Sinatra Core Widgets Import/Export.
+ * Prisma Companion Widgets Import/Export.
  *
  * @since 1.0.0
- * @package Sinatra Core
+ * @package Prisma Companion
  */
-final class Sinatra_Widgets_Import_Export {
+final class Prisma_Companion_Widgets_Import_Export {
 
 	/**
 	 * Singleton instance of the class.
@@ -29,14 +29,14 @@ final class Sinatra_Widgets_Import_Export {
 	private static $instance;
 
 	/**
-	 * Main Sinatra_Widgets_Import_Export Instance.
+	 * Main Prisma_Companion_Widgets_Import_Export Instance.
 	 *
 	 * @since 1.0.0
-	 * @return Sinatra_Widgets_Import_Export
+	 * @return Prisma_Companion_Widgets_Import_Export
 	 */
 	public static function instance() {
 
-		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Sinatra_Widgets_Import_Export ) ) {
+		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Prisma_Companion_Widgets_Import_Export ) ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -63,13 +63,13 @@ final class Sinatra_Widgets_Import_Export {
 		// Have valid data?
 		// If no data or could not decode.
 		if ( empty( $data ) || ! is_array( $data ) ) {
-			return new WP_Error( esc_html__( 'Import data could not be read. Please try a different file.', 'sinatra-core' ) );
+			return new WP_Error( esc_html__( 'Import data could not be read. Please try a different file.', 'prisma-companion' ) );
 		}
 
 		// Hook before import.
-		do_action( 'sinatra_core_before_widgets_import' );
+		do_action( 'prisma_companion_before_widgets_import' );
 
-		$data = apply_filters( 'sinatra_core_widgets_import_data', $data );
+		$data = apply_filters( 'prisma_companion_widgets_import_data', $data );
 
 		// Get all available widgets site supports.
 		$available_widgets = self::get_available_widgets();
@@ -102,7 +102,7 @@ final class Sinatra_Widgets_Import_Export {
 				$sidebar_available    = false;
 				$use_sidebar_id       = 'wp_inactive_widgets'; // Add to inactive if sidebar does not exist in theme.
 				$sidebar_message_type = 'error';
-				$sidebar_message      = esc_html__( 'Widget area does not exist in theme (using Inactive)', 'sinatra-core' );
+				$sidebar_message      = esc_html__( 'Widget area does not exist in theme (using Inactive)', 'prisma-companion' );
 			}
 
 			// Result for sidebar
@@ -125,13 +125,13 @@ final class Sinatra_Widgets_Import_Export {
 				if ( ! $fail && ! isset( $available_widgets[ $id_base ] ) ) {
 					$fail                = true;
 					$widget_message_type = 'error';
-					$widget_message      = esc_html__( 'Site does not support widget', 'sinatra-core' ); // Explain why widget not imported.
+					$widget_message      = esc_html__( 'Site does not support widget', 'prisma-companion' ); // Explain why widget not imported.
 				}
 
 				// Filter to modify settings object before conversion to array and import
 				// Leave this filter here for backwards compatibility with manipulating objects (before conversion to array below)
-				// Ideally the newer sinatra_core_widget_settings_array below will be used instead of this.
-				$widget = apply_filters( 'sinatra_core_widget_settings', $widget );
+				// Ideally the newer prisma_companion_widget_settings_array below will be used instead of this.
+				$widget = apply_filters( 'prisma_companion_widget_settings', $widget );
 
 				// Convert multidimensional objects to multidimensional arrays
 				// Some plugins like Jetpack Widget Visibility store settings as multidimensional arrays
@@ -150,7 +150,7 @@ final class Sinatra_Widgets_Import_Export {
 
 				// Sideload Image widget.
 				if ( 'media_image' === $id_base && isset( $widget['url'] ) ) {
-					$image = (object) sinatra_demo_importer()->sideload_image( $widget['url'] );
+					$image = (object) prisma_companion_demo_importer()->sideload_image( $widget['url'] );
 
 					if ( ! is_wp_error( $image ) ) {
 						if ( isset( $image->attachment_id ) && ! empty( $image->attachment_id ) ) {
@@ -175,7 +175,7 @@ final class Sinatra_Widgets_Import_Export {
 
 					if ( $image_src ) {
 
-						$image = (object) sinatra_demo_importer()->sideload_image( $image_src );
+						$image = (object) prisma_companion_demo_importer()->sideload_image( $image_src );
 
 						if ( ! is_wp_error( $image ) ) {
 							if ( isset( $image->url ) && ! empty( $image->url ) ) {
@@ -186,9 +186,9 @@ final class Sinatra_Widgets_Import_Export {
 				}
 
 				// Filter to modify settings array
-				// This is preferred over the older sinatra_core_widget_settings filter above
+				// This is preferred over the older prisma_companion_widget_settings filter above
 				// Do before identical check because changes may make it identical to end result (such as URL replacements).
-				$widget = apply_filters( 'sinatra_core_widget_settings_array', $widget );
+				$widget = apply_filters( 'prisma_companion_widget_settings_array', $widget );
 
 				// Does widget with identical settings already exist in same sidebar?
 				if ( ! $fail && isset( $widget_instances[ $id_base ] ) ) {
@@ -209,7 +209,7 @@ final class Sinatra_Widgets_Import_Export {
 							$widget_message_type = 'warning';
 
 							// Explain why widget not imported.
-							$widget_message = esc_html__( 'Widget already exists', 'sinatra-core' );
+							$widget_message = esc_html__( 'Widget already exists', 'prisma-companion' );
 
 							break;
 
@@ -281,31 +281,31 @@ final class Sinatra_Widgets_Import_Export {
 						'widget_id_num'     => $new_instance_id_number,
 						'widget_id_num_old' => $instance_id_number,
 					);
-					do_action( 'sinatra_core_after_widget_import', $after_widget_import );
+					do_action( 'prisma_companion_after_widget_import', $after_widget_import );
 
 					// Success message.
 					if ( $sidebar_available ) {
 						$widget_message_type = 'success';
-						$widget_message      = esc_html__( 'Imported', 'sinatra-core' );
+						$widget_message      = esc_html__( 'Imported', 'prisma-companion' );
 					} else {
 						$widget_message_type = 'warning';
-						$widget_message      = esc_html__( 'Imported to Inactive', 'sinatra-core' );
+						$widget_message      = esc_html__( 'Imported to Inactive', 'prisma-companion' );
 					}
 				}
 
 				// Result for widget instance.
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['name']         = isset( $available_widgets[ $id_base ]['name'] ) ? $available_widgets[ $id_base ]['name'] : $id_base; // Widget name or ID if name not available (not supported by site).
-				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['title']        = ! empty( $widget['title'] ) ? $widget['title'] : esc_html__( 'No Title', 'sinatra-core' ); // Show "No Title" if widget instance is untitled.
+				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['title']        = ! empty( $widget['title'] ) ? $widget['title'] : esc_html__( 'No Title', 'prisma-companion' ); // Show "No Title" if widget instance is untitled.
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['message_type'] = $widget_message_type;
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['message']      = $widget_message;
 			}
 		}
 
 		// Hook after import.
-		do_action( 'sinatra_core_after_widgets_import' );
+		do_action( 'prisma_companion_after_widgets_import' );
 
 		// Return results.
-		return apply_filters( 'sinatra_core_widgets_import_results', $results );
+		return apply_filters( 'prisma_companion_widgets_import_results', $results );
 	}
 
 	/**
@@ -317,7 +317,7 @@ final class Sinatra_Widgets_Import_Export {
 
 		// Export data.
 		$data = self::generate_export_data();
-		$data = apply_filters( 'sinatra_widgets_export_data', $data );
+		$data = apply_filters( 'prisma_core_widgets_export_data', $data );
 		$data = wp_json_encode( $data );
 
 		$filesize = strlen( $data );
@@ -441,6 +441,6 @@ final class Sinatra_Widgets_Import_Export {
 			}
 		}
 
-		return apply_filters( 'sinatra_core_available_widgets', $available_widgets );
+		return apply_filters( 'prisma_companion_available_widgets', $available_widgets );
 	}
 }

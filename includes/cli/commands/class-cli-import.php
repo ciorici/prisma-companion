@@ -1,9 +1,9 @@
 <?php
 /**
- * Sinatra Core Import CLI Command class file.
+ * Prisma Companion Import CLI Command class file.
  *
- * @package Sinatra Core
- * @author  Sinatra Team <hello@sinatrawp.com>
+ * @package Prisma Companion
+ * @author  Prisma Core Team
  * @since   1.0.0
  */
 
@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Allows import via CLI.
  *
  * @version 1.0.0
- * @package Sinatra Core
+ * @package Prisma Companion
  */
-class Sinatra_Core_CLI_Import {
+class Prisma_Companion_CLI_Import {
 
 	/**
 	 * Registers the import command.
@@ -29,10 +29,10 @@ class Sinatra_Core_CLI_Import {
 
 		// Import demo command.
 		WP_CLI::add_command(
-			'sinatra import demo',
-			array( 'Sinatra_Core_CLI_Import', 'import' ),
+			'prisma import demo',
+			array( 'Prisma_Companion_CLI_Import', 'import' ),
 			array(
-				'shortdesc' => __( 'Imports demo content', 'sinatra-core' ),
+				'shortdesc' => __( 'Imports demo content', 'prisma-companion' ),
 				'synopsis'  => array(
 					array(
 						'type'        => 'positional',
@@ -47,10 +47,10 @@ class Sinatra_Core_CLI_Import {
 
 		// Import demo command.
 		WP_CLI::add_command(
-			'sinatra import page',
-			array( 'Sinatra_Core_CLI_Import', 'import_page' ),
+			'prisma import page',
+			array( 'Prisma_Companion_CLI_Import', 'import_page' ),
 			array(
-				'shortdesc' => __( 'Imports a demo page', 'sinatra-core' ),
+				'shortdesc' => __( 'Imports a demo page', 'prisma-companion' ),
 				'synopsis'  => array(
 					array(
 						'type'        => 'associative',
@@ -74,9 +74,9 @@ class Sinatra_Core_CLI_Import {
 		$demo_slug = sanitize_title( $args[0] );
 
 		// Load Demo Library class.
-		if ( ! function_exists( 'sinatra_demo_library' ) ) {
+		if ( ! function_exists( 'prisma_companion_demo_library' ) ) {
 
-			$class = SINATRA_CORE_PLUGIN_DIR . 'includes/admin/demo-library/class-sinatra-demo-library.php';
+			$class = PRISMA_COMPANION_PLUGIN_DIR . 'includes/admin/demo-library/class-prisma-companion-demo-library.php';
 
 			if ( file_exists( $class ) ) {
 				require_once $class;
@@ -86,7 +86,7 @@ class Sinatra_Core_CLI_Import {
 			}
 		}
 
-		$demos = sinatra_demo_library()->get_templates();
+		$demos = prisma_companion_demo_library()->get_templates();
 
 		// Check if demo exists.
 		if ( ! array_key_exists( $demo_slug, $demos ) ) {
@@ -94,7 +94,7 @@ class Sinatra_Core_CLI_Import {
 			WP_CLI::error_multi_line(
 				array(
 					/* translators: %s Demo Slug */
-					sprintf( __( '%s demo slug is not valid.', 'sinatra-core' ), $demo_slug ),
+					sprintf( __( '%s demo slug is not valid.', 'prisma-companion' ), $demo_slug ),
 				)
 			);
 
@@ -113,7 +113,7 @@ class Sinatra_Core_CLI_Import {
 		}
 
 		// Configure import paths.
-		$response = sinatra_demo_importer()->configure_paths( $demo_slug );
+		$response = prisma_companion_demo_importer()->configure_paths( $demo_slug );
 
 		if ( is_wp_error( $response ) ) {
 			WP_CLI::error( $response->get_error_message() );
@@ -123,7 +123,7 @@ class Sinatra_Core_CLI_Import {
 		foreach ( self::get_import_steps( $demo ) as $step ) {
 
 			/* translators: %s import step */
-			WP_CLI::log( sprintf( __( 'Importing %s...', 'sinatra-core' ), $step ) );
+			WP_CLI::log( sprintf( __( 'Importing %s...', 'prisma-companion' ), $step ) );
 
 			$args = array();
 
@@ -135,14 +135,14 @@ class Sinatra_Core_CLI_Import {
 			}
 
 			// Call import step function.
-			$response = call_user_func_array( array( sinatra_demo_importer(), 'import_' . $step ), $args );
+			$response = call_user_func_array( array( prisma_companion_demo_importer(), 'import_' . $step ), $args );
 
 			if ( is_wp_error( $response ) ) {
 				WP_CLI::warning( $response->get_error_message() );
 			}
 		}
 
-		WP_CLI::log( sprintf( __( 'Demo import complete.', 'sinatra-core' ), $step ) );
+		WP_CLI::log( sprintf( __( 'Demo import complete.', 'prisma-companion' ), $step ) );
 	}
 
 	/**
@@ -182,9 +182,9 @@ class Sinatra_Core_CLI_Import {
 		$attachments = isset( $assoc_args['attachments'] ) ? boolval( $assoc_args['attachments'] ) : true;
 
 		// Load Demo Library class.
-		if ( ! function_exists( 'sinatra_demo_importer' ) ) {
+		if ( ! function_exists( 'prisma_companion_demo_importer' ) ) {
 
-			$class = SINATRA_CORE_PLUGIN_DIR . 'includes/admin/demo-library/class-sinatra-demo-importer.php';
+			$class = PRISMA_COMPANION_PLUGIN_DIR . 'includes/admin/demo-library/class-prisma-companion-demo-importer.php';
 
 			if ( file_exists( $class ) ) {
 				require_once $class;
@@ -201,13 +201,13 @@ class Sinatra_Core_CLI_Import {
 
 			// Check upload folder permission.
 			if ( ! wp_is_writable( trailingslashit( $upload_dir['basedir'] ) ) ) {
-				WP_CLI::error( __( 'Upload folder not writable.', 'sinatra-core' ) );
+				WP_CLI::error( __( 'Upload folder not writable.', 'prisma-companion' ) );
 				return;
 			}
 
-			$to = trailingslashit( $upload_dir['basedir'] ) . 'sinatra/pages/' . basename( $xml_file );
+			$to = trailingslashit( $upload_dir['basedir'] ) . 'prisma-companion/pages/' . basename( $xml_file );
 
-			$xml_file = sinatra_demo_importer()->download( $xml_file, $to );
+			$xml_file = prisma_companion_demo_importer()->download( $xml_file, $to );
 
 			if ( is_wp_error( $xml_file ) ) {
 				WP_CLI::error( $xml_file->get_error_message() );
@@ -215,13 +215,13 @@ class Sinatra_Core_CLI_Import {
 			}
 		}
 
-		$import = sinatra_demo_importer()->process_import_content( $xml_file, true );
+		$import = prisma_companion_demo_importer()->process_import_content( $xml_file, true );
 
 		if ( is_wp_error( $import ) ) {
 			WP_CLI::error( $import->get_error_message() );
 			return;
 		}
 
-		WP_CLI::success( __( 'Page imported.', 'sinatra-core' ) );
+		WP_CLI::success( __( 'Page imported.', 'prisma-companion' ) );
 	}
 }

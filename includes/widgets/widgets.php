@@ -1,9 +1,9 @@
 <?php
 /**
- * Sinatra Core - Register new widgets.
+ * Prisma Companion - Register new widgets.
  *
- * @package     Sinatra Core
- * @author      Sinatra Team <hello@sinatrawp.com>
+ * @package     Prisma Companion
+ * @author      Prisma Core Team
  * @since       1.0.0
  */
 
@@ -19,15 +19,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-function sinatra_core_get_widgets() {
+function prisma_companion_get_widgets() {
 
 	$widgets = array(
-		'sinatra-core-custom-list-widget'  => 'Sinatra_Core_Custom_List_Widget',
-		'sinatra-core-social-links-widget' => 'Sinatra_Core_Social_Links_Widget',
-		'sinatra-core-posts-list-widget'   => 'Sinatra_Core_Posts_List_Widget',
+		'prisma-companion-custom-list-widget'  => 'Prisma_Companion_Custom_List_Widget',
+		'prisma-companion-social-links-widget' => 'Prisma_Companion_Social_Links_Widget',
+		'prisma-companion-posts-list-widget'   => 'Prisma_Companion_Posts_List_Widget',
 	);
 
-	return apply_filters( 'sinatra_core_widgets', $widgets );
+	return apply_filters( 'prisma_companion_widgets', $widgets );
 }
 
 /**
@@ -35,17 +35,17 @@ function sinatra_core_get_widgets() {
  *
  * @since 1.0.0
  */
-function sinatra_core_register_widgets() {
+function prisma_companion_register_widgets() {
 
 	// Get available widgets.
-	$widgets = sinatra_core_get_widgets();
+	$widgets = prisma_companion_get_widgets();
 
 	if ( empty( $widgets ) ) {
 		return;
 	}
 
 	// Path to widgets folder.
-	$path = SINATRA_CORE_PLUGIN_DIR . 'includes/widgets';
+	$path = PRISMA_COMPANION_PLUGIN_DIR . 'includes/widgets';
 
 	// Register widgets.
 	foreach ( $widgets as $key => $value ) {
@@ -59,61 +59,61 @@ function sinatra_core_register_widgets() {
 		}
 	}
 }
-add_action( 'widgets_init', 'sinatra_core_register_widgets' );
+add_action( 'widgets_init', 'prisma_companion_register_widgets' );
 
 /**
  * Enqueue admin styles.
  *
  * @since 1.0.0
  */
-function sinatra_core_widgets_enqueue( $page ) {
+function prisma_companion_widgets_enqueue( $page ) {
 
 	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 	wp_enqueue_style(
-		'sinatra-admin-widgets-css',
-		SINATRA_CORE_PLUGIN_URL . 'assets/css/admin-widgets' . $suffix . '.css',
-		SINATRA_CORE_VERSION,
+		'prisma-companion-admin-widgets-css',
+		PRISMA_COMPANION_PLUGIN_URL . 'assets/css/admin-widgets' . $suffix . '.css',
+		PRISMA_COMPANION_VERSION,
 		true
 	);
 
 	wp_enqueue_script(
-		'sinatra-admin-widgets-js',
-		SINATRA_CORE_PLUGIN_URL . 'assets/js/admin-widgets.min.js',
+		'prisma-companion-admin-widgets-js',
+		PRISMA_COMPANION_PLUGIN_URL . 'assets/js/admin-widgets.min.js',
 		array( 'jquery' ),
-		SINATRA_CORE_VERSION,
+		PRISMA_COMPANION_VERSION,
 		true
 	);
 }
-add_action( 'admin_print_footer_scripts-widgets.php', 'sinatra_core_widgets_enqueue' );
+add_action( 'admin_print_footer_scripts-widgets.php', 'prisma_companion_widgets_enqueue' );
 
 /**
  * Enqueue front styles.
  *
  * @since 1.0.0
  */
-function sinatra_core_enqueue_widget_assets() {
+function prisma_companion_enqueue_widget_assets() {
 
 	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-	$widgets = sinatra_core_get_widgets();
+	$widgets = prisma_companion_get_widgets();
 
 	if ( is_array( $widgets ) ) {
 		foreach ( $widgets as $id_slug => $class ) {
 			if ( is_active_widget( false, false, $id_slug, true ) ) {
 
 				wp_enqueue_style(
-					'sinatra-core-widget-styles',
-					SINATRA_CORE_PLUGIN_URL . 'assets/css/widgets' . $suffix . '.css',
+					'prisma-companion-widget-styles',
+					PRISMA_COMPANION_PLUGIN_URL . 'assets/css/widgets' . $suffix . '.css',
 					false,
-					SINATRA_CORE_VERSION,
+					PRISMA_COMPANION_VERSION,
 					'all'
 				);
 			}
 		}
 	}
 }
-add_action( 'wp_enqueue_scripts', 'sinatra_core_enqueue_widget_assets' );
+add_action( 'wp_enqueue_scripts', 'prisma_companion_enqueue_widget_assets' );
 
 
 
@@ -123,25 +123,25 @@ add_action( 'wp_enqueue_scripts', 'sinatra_core_enqueue_widget_assets' );
  * @since  1.0.0
  * @return void
  */
-function sinatra_core_print_widget_templates() {
+function prisma_companion_print_widget_templates() {
 	?>
-	<script type="text/template" id="tmpl-sinatra-core-repeatable-item">
-		<div class="si-repeatable-item open">
+	<script type="text/template" id="tmpl-prisma-companion-repeatable-item">
+		<div class="pc-repeatable-item open">
 
-			<div class="si-repeatable-item-title">
-				<?php echo esc_attr_x( 'New Item', 'Widget', 'sinatra-core' ); ?>
+			<div class="pc-repeatable-item-title">
+				<?php echo esc_attr_x( 'New Item', 'Widget', 'prisma-companion' ); ?>
 
-				<div class="si-repeatable-indicator">
+				<div class="pc-repeatable-indicator">
 					<span class="accordion-section-title" aria-hidden="true"></span>
 				</div>
 
 			</div>
 
-			<div class="si-repeatable-item-content">
+			<div class="pc-repeatable-item-content">
 
 				<p>
 					<label for="{{data.id}}-{{data.index}}-icon">
-						<?php echo esc_attr_x( 'Icon', 'Widget', 'sinatra-core' ); ?>
+						<?php echo esc_attr_x( 'Icon', 'Widget', 'prisma-companion' ); ?>
 					</label>
 
 					<textarea class="widefat" id="{{data.id}}-{{data.index}}-icon" name="{{data.name}}[{{data.index}}][icon]" rows="3"></textarea>
@@ -149,15 +149,15 @@ function sinatra_core_print_widget_templates() {
 				
 				<p>
 					<label for="{{data.id}}-{{data.index}}-description">
-						<?php echo esc_attr_x( 'Item Description', 'Widget', 'sinatra-core' ); ?>
+						<?php echo esc_attr_x( 'Item Description', 'Widget', 'prisma-companion' ); ?>
 					</label>
 					<textarea class="widefat" id="{{data.id}}-{{data.index}}-description" name="{{data.name}}[{{data.index}}][description]" rows="3"></textarea>
-					<em class="description si-description">
+					<em class="description pc-description">
 						<?php
 						echo wp_kses_post(
 							sprintf(
-								_x( 'HTML tags and %1$sdynamic strings%2$s allowed.', 'Widget', 'sinatra-core' ),
-								'<a href="https://sinatrawp.com/docs/sinatra-dynamic-strings/" rel="nofollow noreferrer" target="_blank">',
+								_x( 'HTML tags and %1$sdynamic strings%2$s allowed.', 'Widget', 'prisma-companion' ),
+								'<a href="https://github.com/ciorici/prisma-core/docs/prisma-dynamic-strings/" rel="nofollow noreferrer" target="_blank">',
 								'</a>'
 							)
 						);
@@ -167,13 +167,13 @@ function sinatra_core_print_widget_templates() {
 
 				<p>
 					<input type="checkbox" id="{{data.name}}[{{data.index}}][separator]" name="{{data.name}}[{{data.index}}][separator]" />
-					<label for="{{data.name}}[{{data.index}}][separator]"><?php _ex( 'Add bottom separator', 'Widget', 'sinatra-core' ); ?></label>
+					<label for="{{data.name}}[{{data.index}}][separator]"><?php _ex( 'Add bottom separator', 'Widget', 'prisma-companion' ); ?></label>
 				</p>
 
-				<button type="button" class="remove-repeatable-item button-link button-link-delete"><?php _ex( 'Remove', 'Widget', 'sinatra-core' ); ?></button>
+				<button type="button" class="remove-repeatable-item button-link button-link-delete"><?php _ex( 'Remove', 'Widget', 'prisma-companion' ); ?></button>
 			</div>
 		</div>
 	</script>
 	<?php
 }
-add_action( 'admin_print_footer_scripts-widgets.php', 'sinatra_core_print_widget_templates' );
+add_action( 'admin_print_footer_scripts-widgets.php', 'prisma_companion_print_widget_templates' );

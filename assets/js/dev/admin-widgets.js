@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------//
-// Sinatra Core Admin Widgets script.
+// Prisma Companion Admin Widgets script.
 //--------------------------------------------------------------------//
 ;(function( $ ) {
 	"use strict";
@@ -18,7 +18,7 @@
 	 * 
 	 * @type {Object}
 	 */
-	var SinatraCoreAdminWidgets = {
+	var PrismaCompanionWidgets = {
 
 		/**
 		 * Start the engine.
@@ -28,16 +28,16 @@
 		init: function() {
 
 			// Document ready
-			$(document).ready( SinatraCoreAdminWidgets.ready );
+			$(document).ready( PrismaCompanionWidgets.ready );
 
 			// Window load
-			$(window).on( 'load', SinatraCoreAdminWidgets.load );
+			$(window).on( 'load', PrismaCompanionWidgets.load );
 
 			// Bind UI actions
-			SinatraCoreAdminWidgets.bindUIActions();
+			PrismaCompanionWidgets.bindUIActions();
 
-			// Trigger event when Sinatra fully loaded
-			$(document).trigger( 'sinatraCoreWidgetsReady' );
+			// Trigger event when Prisma Companion fully loaded
+			$(document).trigger( 'prismaCompanionWidgetsReady' );
 		},
 
 		//--------------------------------------------------------------------//
@@ -51,7 +51,7 @@
 		 */
 		ready: function() {
 
-			SinatraCoreAdminWidgets.initRepeatableSortable();
+			PrismaCompanionWidgets.initRepeatableSortable();
 		},
 
 		/**
@@ -74,12 +74,12 @@
 				template,
 				$widget;
 
-			$(document).on( 'click', '.si-repeatable-widget .add-new-item', function(e){
+			$(document).on( 'click', '.pc-repeatable-widget .add-new-item', function(e){
 				e.preventDefault();
 
 				$this    = $(this);
 				index    = parseInt( $this.attr('data-index') );
-				template = wp.template( 'sinatra-core-repeatable-item' );
+				template = wp.template( 'prisma-companion-repeatable-item' );
 
 				var data = {
 					index: index,
@@ -90,33 +90,33 @@
 				index++;
 
 				$this.attr( 'data-index', index );
-				$( template( data ) ).insertBefore( $this.closest('.si-repeatable-footer') );
+				$( template( data ) ).insertBefore( $this.closest('.pc-repeatable-footer') );
 				$this.closest('.widget-inside').trigger('change');
 
 				update_widget_repeatable_class( $this );
 			});
 
-			$(document).on( 'click', '.si-repeatable-widget .remove-repeatable-item', function(e){
+			$(document).on( 'click', '.pc-repeatable-widget .remove-repeatable-item', function(e){
 				e.preventDefault();
 
 				$this   = $(this);
-				$widget = $this.closest('.si-repeatable-container');
+				$widget = $this.closest('.pc-repeatable-container');
 
 				$this.closest('.widget-inside').trigger('change');
-				$this.closest('.si-repeatable-item').remove();
+				$this.closest('.pc-repeatable-item').remove();
 				
 				update_widget_repeatable_class( $widget );
 			});
 
-			$(document).on( 'click', '.si-repeatable-widget .si-repeatable-item-title', function(){
-				$(this).closest('.si-repeatable-item').toggleClass('open');
+			$(document).on( 'click', '.pc-repeatable-widget .pc-repeatable-item-title', function(){
+				$(this).closest('.pc-repeatable-item').toggleClass('open');
 			});
 
 			var update_widget_repeatable_class = function( $target ) {
 
-				var $widget = $target.closest('.si-repeatable-container');
+				var $widget = $target.closest('.pc-repeatable-container');
 
-				if ( $widget.find('.si-repeatable-item').length ) {
+				if ( $widget.find('.pc-repeatable-item').length ) {
 					$widget.removeClass('empty');
 				} else {
 					$widget.addClass('empty');
@@ -125,8 +125,8 @@
 
 			// Updated widget event.
 			$(document).on( 'widget-updated widget-added', function( e, widget ){
-				if ( widget.find('.si-repeatable-container').length ) {
-					SinatraCoreAdminWidgets.initRepeatableSortable();
+				if ( widget.find('.pc-repeatable-container').length ) {
+					PrismaCompanionWidgets.initRepeatableSortable();
 				}
 			});
 		},
@@ -137,9 +137,9 @@
 
 		initRepeatableSortable: function() {
 
-			$('.si-repeatable-container').sortable({
-				handle: '.si-repeatable-item-title',
-				accent: '.si-repeatable-item',
+			$('.pc-repeatable-container').sortable({
+				handle: '.pc-repeatable-item-title',
+				accent: '.pc-repeatable-item',
 				containment: 'parent',
 				tolerance: 'pointer',
 				change: function( event, ui ){
@@ -150,9 +150,9 @@
 
 		},
 
-	}; // END var SinatraCoreAdminWidgets.
+	}; // END var PrismaCompanionWidgets.
 
-	SinatraCoreAdminWidgets.init();
-	window.SinatraCoreAdminWidgets = SinatraCoreAdminWidgets;	
+	PrismaCompanionWidgets.init();
+	window.PrismaCompanionWidgets = PrismaCompanionWidgets;	
 
 })( jQuery );

@@ -1,12 +1,12 @@
 @font-face {
-  font-family: "sinatra-dashicon";
-  src: url("../fonts/si-icon.eot");
-  src: url("../fonts/si-icon.eot#iefix") format("embedded-opentype"), url("../fonts/si-icon.ttf") format("truetype"), url("../fonts/si-icon.woff") format("woff"), url("../fonts/si-icon.svg#icomoon") format("svg");
+  font-family: "prisma-companion-dashicon";
+  src: url("../fonts/pc-icon.eot");
+  src: url("../fonts/pc-icon.eot#iefix") format("embedded-opentype"), url("../fonts/pc-icon.ttf") format("truetype"), url("../fonts/pc-icon.woff") format("woff"), url("../fonts/pc-icon.svg#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 .dashicons-si-brand:before {
-  font-family: "sinatra-dashicon" !important;
+  font-family: "prisma-companion-dashicon" !important;
   content: "\e900" !important;
   font-size: 13px !important;
   display: -webkit-inline-box;

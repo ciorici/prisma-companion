@@ -36,8 +36,8 @@ require dirname( __FILE__ ) . '/class-parsers.php';
  * @package WordPress
  * @subpackage Importer
  */
-if ( ! class_exists( 'Sinatra_Core_WP_Import' ) ) {
-class Sinatra_Core_WP_Import extends WP_Importer {
+if ( ! class_exists( 'Prisma_Companion_WP_Import' ) ) {
+class Prisma_Companion_WP_Import extends WP_Importer {
 	var $max_wxr_version = 1.2; // max. supported WXR version
 
 	var $id; // WXR attachment ID
@@ -1126,7 +1126,7 @@ class Sinatra_Core_WP_Import extends WP_Importer {
 	 * @return array Information gathered from the WXR file
 	 */
 	function parse( $file ) {
-		$parser = new Sinatra_Core_WXR_Parser();
+		$parser = new Prisma_Companion_WXR_Parser();
 		return $parser->parse( $file );
 	}
 

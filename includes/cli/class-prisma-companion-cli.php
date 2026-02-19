@@ -1,9 +1,9 @@
 <?php
 /**
- * Enables Sinatra Core, via the the command line.
+ * Enables Prisma Companion, via the the command line.
  *
- * @package Sinatra Core
- * @author  Sinatra Team <hello@sinatrawp.com>
+ * @package Prisma Companion
+ * @author  Prisma Core Team
  * @since   1.0.0
  */
 
@@ -13,9 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Sinatra Core CLI class.
+ * Prisma Companion CLI class.
  */
-class Sinatra_Core_CLI {
+class Prisma_Companion_CLI {
 
 	/**
 	 * Load required files and hooks to make the CLI work.
@@ -42,7 +42,7 @@ class Sinatra_Core_CLI {
 	 * @since 1.0.0
 	 */
 	private function hooks() {
-		WP_CLI::add_hook( 'after_wp_load', 'Sinatra_Core_CLI_Import::register_commands' );
+		WP_CLI::add_hook( 'after_wp_load', 'Prisma_Companion_CLI_Import::register_commands' );
 	}
 }
-new Sinatra_Core_CLI();
+new Prisma_Companion_CLI();

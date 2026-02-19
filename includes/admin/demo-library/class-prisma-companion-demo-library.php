@@ -1,9 +1,9 @@
 <?php
 /**
- * Sinatra Demo Library. Install a copy of a Sinatra demo to your website.
+ * Prisma Companion Demo Library. Install a copy of a Prisma Core demo to your website.
  *
- * @package Sinatra Core
- * @author  Sinatra Team <hello@sinatrawp.com>
+ * @package Prisma Companion
+ * @author  Prisma Core Team
  * @since   1.0.0
  */
 
@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Sinatra Demo Library Class.
+ * Prisma Companion Demo Library Class.
  *
  * @since 1.0.0
- * @package Sinatra Core
+ * @package Prisma Companion
  */
-final class Sinatra_Demo_Library {
+final class Prisma_Companion_Demo_Library {
 
 	/**
 	 * Singleton instance of the class.
@@ -45,14 +45,14 @@ final class Sinatra_Demo_Library {
 	public $templates = false;
 
 	/**
-	 * Main Sinatra Demo Library Instance.
+	 * Main Prisma Companion Demo Library Instance.
 	 *
 	 * @since 1.0.0
-	 * @return Sinatra_Demo_Library
+	 * @return Prisma_Companion_Demo_Library
 	 */
 	public static function instance() {
 
-		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Sinatra_Demo_Library ) ) {
+		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Prisma_Companion_Demo_Library ) ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -65,12 +65,12 @@ final class Sinatra_Demo_Library {
 	 */
 	public function __construct() {
 
-		$this->version = defined( SINATRA_CORE_VERSION ) ? SINATRA_CORE_VERSION : $this->version;
+		$this->version = defined( PRISMA_COMPANION_VERSION ) ? PRISMA_COMPANION_VERSION : $this->version;
 
 		$this->includes();
 		$this->hooks();
 
-		do_action( 'sinatra_demo_library_loaded' );
+		do_action( 'prisma_companion_demo_library_loaded' );
 	}
 
 	/**
@@ -79,9 +79,9 @@ final class Sinatra_Demo_Library {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-		require_once plugin_dir_path( __FILE__ ) . 'class-sinatra-demo-library-page.php';
-		require_once plugin_dir_path( __FILE__ ) . 'class-sinatra-demo-importer.php';
-		require_once plugin_dir_path( __FILE__ ) . 'class-sinatra-demo-exporter.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-prisma-companion-demo-library-page.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-prisma-companion-demo-importer.php';
+		require_once plugin_dir_path( __FILE__ ) . 'class-prisma-companion-demo-exporter.php';
 	}
 
 	/**
@@ -92,7 +92,7 @@ final class Sinatra_Demo_Library {
 	private function hooks() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue' ) );
 		add_action( 'admin_init', array( $this, 'refresh_templates' ) );
-		add_action( 'wp_ajax_sinatra-core-filter-demos', array( $this, 'filter_templates' ) );
+		add_action( 'wp_ajax_prisma-companion-filter-demos', array( $this, 'filter_templates' ) );
 	}
 
 	/**
@@ -105,12 +105,12 @@ final class Sinatra_Demo_Library {
 	 */
 	public function admin_enqueue( $hook = '' ) {
 
-		if ( 'sinatra_page_sinatra-demo-library' !== $hook ) {
+		if ( 'prisma_core_page_prisma-core-demo-library' !== $hook ) {
 			return;
 		}
 
 		wp_enqueue_script(
-			'sinatra-demo-library',
+			'prisma-core-demo-library',
 			plugin_dir_url( __FILE__ ) . 'assets/js/demo-library.min.js',
 			array( 'jquery', 'wp-util', 'updates' ),
 			$this->version,
@@ -119,37 +119,37 @@ final class Sinatra_Demo_Library {
 
 		$localized = array(
 			'strings'   => array(
-				'closeWindowWarning'  => __( 'Warning! Demo import process is not complete. Don\'t close the window until import process is complete. Do you still want to leave the window?', 'sinatra-core' ),
-				'importDemoWarning'   => __( 'Demo import process will start now. Please do not close the window until import process is complete.', 'sinatra-core' ),
-				'importing'           => __( 'Importing...', 'sinatra-core' ),
-				'installingPlugin'    => __( 'Installing plugin', 'sinatra-core' ) . ' ',
-				'installed'           => __( 'Plugin installed!', 'sinatra-core' ),
-				'activatingPlugin'    => __( 'Activating plugin', 'sinatra-core' ) . ' ',
-				'activated'           => __( 'Plugin activated! ', 'sinatra-core' ),
-				'importCompleted'     => __( 'All Done! Visit Site', 'sinatra-core' ),
-				'importingCustomizer' => __( 'Importing Customizer...', 'sinatra-core' ),
-				'importingContent'    => __( 'Importing Content...', 'sinatra-core' ),
-				'importingWPForms'    => __( 'Importing WPForms...', 'sinatra-core' ),
-				'importingOptions'    => __( 'Importing Options...', 'sinatra-core' ),
-				'importingWidgets'    => __( 'Importing Widgets...', 'sinatra-core' ),
-				'preview'             => __( 'Preview', 'sinatra-core' ),
-				'preparing'           => __( 'Preparing Data...', 'sinatra-core' ),
-				'noResultsFound'      => __( 'No results found', 'sinatra-core' ),
+				'closeWindowWarning'  => __( 'Warning! Demo import process is not complete. Don\'t close the window until import process is complete. Do you still want to leave the window?', 'prisma-companion' ),
+				'importDemoWarning'   => __( 'Demo import process will start now. Please do not close the window until import process is complete.', 'prisma-companion' ),
+				'importing'           => __( 'Importing...', 'prisma-companion' ),
+				'installingPlugin'    => __( 'Installing plugin', 'prisma-companion' ) . ' ',
+				'installed'           => __( 'Plugin installed!', 'prisma-companion' ),
+				'activatingPlugin'    => __( 'Activating plugin', 'prisma-companion' ) . ' ',
+				'activated'           => __( 'Plugin activated! ', 'prisma-companion' ),
+				'importCompleted'     => __( 'All Done! Visit Site', 'prisma-companion' ),
+				'importingCustomizer' => __( 'Importing Customizer...', 'prisma-companion' ),
+				'importingContent'    => __( 'Importing Content...', 'prisma-companion' ),
+				'importingWPForms'    => __( 'Importing WPForms...', 'prisma-companion' ),
+				'importingOptions'    => __( 'Importing Options...', 'prisma-companion' ),
+				'importingWidgets'    => __( 'Importing Widgets...', 'prisma-companion' ),
+				'preview'             => __( 'Preview', 'prisma-companion' ),
+				'preparing'           => __( 'Preparing Data...', 'prisma-companion' ),
+				'noResultsFound'      => __( 'No results found', 'prisma-companion' ),
 			),
 			'homeurl'   => home_url( '/' ),
 			'templates' => $this->get_templates(),
 		);
 
-		$localized = apply_filters( 'sinatra_core_demo_library_localized', $localized );
+		$localized = apply_filters( 'prisma_companion_demo_library_localized', $localized );
 
 		wp_localize_script(
-			'sinatra-demo-library',
-			'sinatraCoreDemoLibrary',
+			'prisma-core-demo-library',
+			'prismaCompanionDemoLibrary',
 			$localized
 		);
 
 		wp_enqueue_style(
-			'sinatra-core-admin',
+			'prisma-companion-admin',
 			plugin_dir_url( __FILE__ ) . 'assets/css/demo-library.min.css',
 			$this->version,
 			true
@@ -167,16 +167,16 @@ final class Sinatra_Demo_Library {
 
 		// Check if we have stored templates.
 		if ( false === $this->templates ) {
-			$this->templates = get_transient( 'sinatra_core_demo_templates' );
+			$this->templates = get_transient( 'prisma_companion_demo_templates' );
 		}
 
 		// No stored templates, get from remote.
 		if ( false === $this->templates ) {
 
 			$response = wp_remote_get(
-				'https://sinatrawp.com/wp-json/api/v1/demos',
+				'https://github.com/ciorici/prisma-core/wp-json/api/v1/demos',
 				array(
-					'user-agent' => 'Sinatra/' . SINATRA_THEME_VERSION . ';',
+					'user-agent' => 'PrismaCore/' . PRISMA_CORE_THEME_VERSION . ';',
 					'timeout'    => 60,
 				)
 			);
@@ -188,21 +188,21 @@ final class Sinatra_Demo_Library {
 			if ( is_array( $this->templates ) && ! empty( $this->templates ) ) {
 				foreach ( $this->templates as $id => $template ) {
 
-					// Skip demos that require a newer version of Sinatra Core.
-					if ( defined( 'SINATRA_CORE_VERSION' ) && isset( $template['sinatra-core-version'] ) && version_compare( SINATRA_CORE_VERSION, $template['sinatra-core-version'] ) < 0 ) {
+					// Skip demos that require a newer version of Prisma Companion.
+					if ( defined( 'PRISMA_COMPANION_VERSION' ) && isset( $template['prisma-companion-version'] ) && version_compare( PRISMA_COMPANION_VERSION, $template['prisma-companion-version'] ) < 0 ) {
 						unset( $this->templates[ $id ] );
 						continue;
 					}
 
-					// Skip demos that require a newer version of Sinatra Theme.
-					if ( defined( 'SINATRA_THEME_VERSION' ) && isset( $template['sinatra-theme-version'] ) && version_compare( SINATRA_THEME_VERSION, $template['sinatra-theme-version'] ) < 0 ) {
+					// Skip demos that require a newer version of Prisma Core Theme.
+					if ( defined( 'PRISMA_CORE_THEME_VERSION' ) && isset( $template['prisma-core-theme-version'] ) && version_compare( PRISMA_CORE_THEME_VERSION, $template['prisma-core-theme-version'] ) < 0 ) {
 						unset( $this->templates[ $id ] );
 						continue;
 					}
 				}
 			}
 
-			set_transient( 'sinatra_core_demo_templates', $this->templates, 60 * 60 * 24 );
+			set_transient( 'prisma_companion_demo_templates', $this->templates, 60 * 60 * 24 );
 		}
 
 		if ( is_array( $this->templates ) && ! empty( $this->templates ) ) {
@@ -222,13 +222,13 @@ final class Sinatra_Demo_Library {
 	public function refresh_templates() {
 
 		// Security check.
-		if ( ! isset( $_GET['sinatra_core_nonce'] ) || ! wp_verify_nonce( $_GET['sinatra_core_nonce'], 'refresh_templates' ) ) {
+		if ( ! isset( $_GET['prisma_companion_nonce'] ) || ! wp_verify_nonce( $_GET['prisma_companion_nonce'], 'refresh_templates' ) ) {
 			return;
 		}
 
-		delete_transient( 'sinatra_core_demo_templates' );
+		delete_transient( 'prisma_companion_demo_templates' );
 
-		wp_safe_redirect( admin_url( 'admin.php?page=sinatra-demo-library' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=prisma-core-demo-library' ) );
 		die;
 	}
 
@@ -240,11 +240,11 @@ final class Sinatra_Demo_Library {
 	public function filter_templates() {
 
 		// Nonce check.
-		check_ajax_referer( 'sinatra_nonce' );
+		check_ajax_referer( 'prisma_core_nonce' );
 
 		// Permission check.
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( esc_html__( 'You do not have permission to import a demo.', 'sinatra-core' ), 'import_error' );
+			wp_send_json_error( esc_html__( 'You do not have permission to import a demo.', 'prisma-companion' ), 'import_error' );
 		}
 
 		$templates = $this->get_templates();
@@ -298,7 +298,7 @@ final class Sinatra_Demo_Library {
 			return;
 		}
 
-		if ( ! function_exists( 'sinatra_plugin_utilities' ) ) {
+		if ( ! function_exists( 'prisma_core_plugin_utilities' ) ) {
 			return $template['plugins'];
 		}
 
@@ -306,9 +306,9 @@ final class Sinatra_Demo_Library {
 
 		foreach ( $template['plugins'] as $plugin ) {
 
-			if ( sinatra_plugin_utilities()->is_activated( $plugin['slug'] ) ) {
+			if ( prisma_core_plugin_utilities()->is_activated( $plugin['slug'] ) ) {
 				$plugin['status'] = 'active';
-			} elseif ( sinatra_plugin_utilities()->is_installed( $plugin['slug'] ) ) {
+			} elseif ( prisma_core_plugin_utilities()->is_installed( $plugin['slug'] ) ) {
 				$plugin['status'] = 'installed';
 			} else {
 				$plugin['status'] = 'not_installed';
@@ -322,18 +322,18 @@ final class Sinatra_Demo_Library {
 }
 
 /**
- * The function which returns the one Sinatra_Demo_Library instance.
+ * The function which returns the one Prisma_Companion_Demo_Library instance.
  *
  * Use this function like you would a global variable, except without needing
  * to declare the global.
  *
- * Example: <?php $sinatra_demo_library = sinatra_demo_library(); ?>
+ * Example: <?php $prisma_companion_demo_library = prisma_companion_demo_library(); ?>
  *
  * @since 1.0.0
  * @return object
  */
-function sinatra_demo_library() {
-	return Sinatra_Demo_Library::instance();
+function prisma_companion_demo_library() {
+	return Prisma_Companion_Demo_Library::instance();
 }
 
-sinatra_demo_library();
+prisma_companion_demo_library();

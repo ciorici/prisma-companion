@@ -1,9 +1,9 @@
 <?php
 /**
- * Sinatra Demo Library. Install a copy of a Sinatra demo to your website.
+ * Prisma Companion Demo Library. Install a copy of a Prisma Core demo to your website.
  *
- * @package Sinatra Core
- * @author  Sinatra Team <hello@sinatrawp.com>
+ * @package Prisma Companion
+ * @author  Prisma Core Team
  * @since   1.0.0
  */
 
@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Sinatra Core Options Import/Export.
+ * Prisma Companion Options Import/Export.
  *
  * @since 1.0.0
- * @package Sinatra Core
+ * @package Prisma Companion
  */
-final class Sinatra_Options_Import_Export {
+final class Prisma_Companion_Options_Import_Export {
 
 	/**
 	 * Singleton instance of the class.
@@ -29,14 +29,14 @@ final class Sinatra_Options_Import_Export {
 	private static $instance;
 
 	/**
-	 * Main Sinatra_Options_Import_Export Instance.
+	 * Main Prisma_Companion_Options_Import_Export Instance.
 	 *
 	 * @since 1.0.0
-	 * @return Sinatra_Options_Import_Export
+	 * @return Prisma_Companion_Options_Import_Export
 	 */
 	public static function instance() {
 
-		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Sinatra_Options_Import_Export ) ) {
+		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Prisma_Companion_Options_Import_Export ) ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -61,13 +61,13 @@ final class Sinatra_Options_Import_Export {
 		// Have valid data?
 		// If no data or could not decode.
 		if ( empty( $data ) || ! is_array( $data ) ) {
-			return new WP_Error( esc_html__( 'Import data could not be read. Please try a different file.', 'sinatra-core' ) );
+			return new WP_Error( esc_html__( 'Import data could not be read. Please try a different file.', 'prisma-companion' ) );
 		}
 
 		// Hook before import.
-		do_action( 'sinatra_core_before_options_import' );
+		do_action( 'prisma_companion_before_options_import' );
 
-		$data = apply_filters( 'sinatra_core_options_import_data', $data );
+		$data = apply_filters( 'prisma_companion_options_import_data', $data );
 
 		foreach ( $data as $option_name => $option_value ) {
 
@@ -119,7 +119,7 @@ final class Sinatra_Options_Import_Export {
 		}
 
 		// Hook after import.
-		do_action( 'sinatra_core_after_options_import' );
+		do_action( 'prisma_companion_after_options_import' );
 	}
 
 	/**
@@ -234,7 +234,7 @@ final class Sinatra_Options_Import_Export {
 		}
 
 		// @todo wpforms settings.
-		$data = apply_filters( 'sinatra_customizer_export_data', $data );
+		$data = apply_filters( 'prisma_core_customizer_export_data', $data );
 		$data = wp_json_encode( $data );
 
 		$filesize = strlen( $data );
@@ -307,7 +307,7 @@ final class Sinatra_Options_Import_Export {
 			'wpforms_settings',
 		);
 
-		return apply_filters( 'sinatra_core_site_options', $options );
+		return apply_filters( 'prisma_companion_site_options', $options );
 	}
 
 	/**
@@ -372,7 +372,7 @@ final class Sinatra_Options_Import_Export {
 
 				if ( ! empty( $cat['slug'] ) && ! empty( $cat['thumbnail_src'] ) ) {
 
-					$image = (object) sinatra_demo_importer()->sideload_image( $cat['thumbnail_src'] );
+					$image = (object) prisma_companion_demo_importer()->sideload_image( $cat['thumbnail_src'] );
 
 					if ( ! is_wp_error( $image ) ) {
 
@@ -399,7 +399,7 @@ final class Sinatra_Options_Import_Export {
 	 */
 	private function insert_logo( $image_url = '' ) {
 
-		$data = (object) sinatra_demo_importer()->sideload_image( $image_url );
+		$data = (object) prisma_companion_demo_importer()->sideload_image( $image_url );
 
 		if ( ! is_wp_error( $data ) ) {
 

@@ -1,12 +1,12 @@
 <?php
 /**
- * Sinatra Core Widget: Custom List.
+ * Prisma Companion Widget: Custom List.
  *
- * @package Sinatra Core
- * @author  Sinatra Team <hello@sinatrawp.com>
+ * @package Prisma Companion
+ * @author  Prisma Core Team
  * @since   1.0.0
  */
-class Sinatra_Core_Custom_List_Widget extends WP_Widget {
+class Prisma_Companion_Custom_List_Widget extends WP_Widget {
 
 	/**
 	 * Holds widget settings defaults, populated in constructor.
@@ -31,12 +31,12 @@ class Sinatra_Core_Custom_List_Widget extends WP_Widget {
 		);
 
 		// Widget Slug.
-		$widget_slug = 'sinatra-core-custom-list-widget';
+		$widget_slug = 'prisma-companion-custom-list-widget';
 
 		// Widget basics.
 		$widget_ops = array(
 			'classname'   => $widget_slug,
-			'description' => _x( 'A list of items with optional icon and separator.', 'Widget', 'sinatra' ),
+			'description' => _x( 'A list of items with optional icon and separator.', 'Widget', 'prisma-core' ),
 		);
 
 		// Widget controls.
@@ -45,10 +45,10 @@ class Sinatra_Core_Custom_List_Widget extends WP_Widget {
 		);
 
 		// load widget
-		parent::__construct( $widget_slug, _x( '[Sinatra] Custom List', 'Widget', 'sinatra' ), $widget_ops, $control_ops );
+		parent::__construct( $widget_slug, _x( '[Prisma] Custom List', 'Widget', 'prisma-core' ), $widget_ops, $control_ops );
 
 		// Hook into dynamic styles.
-		add_filter( 'sinatra_dynamic_styles', array( $this, 'dynamic_styles' ) );
+		add_filter( 'prisma_core_dynamic_styles', array( $this, 'dynamic_styles' ) );
 	}
 
 	/**
@@ -65,7 +65,7 @@ class Sinatra_Core_Custom_List_Widget extends WP_Widget {
 
 		echo wp_kses_post( $args['before_widget'] );
 
-		do_action( 'sinatra_before_custom_list_widget', $instance );
+		do_action( 'prisma_core_before_custom_list_widget', $instance );
 
 		// Title.
 		if ( ! empty( $instance['title'] ) ) {
@@ -73,33 +73,33 @@ class Sinatra_Core_Custom_List_Widget extends WP_Widget {
 		}
 
 		if ( ! empty( $instance['content'] ) ) {
-			$instance['content'] = apply_filters( 'sinatra_dynamic_strings', $instance['content'] );
-			echo '<div class="si-custom-list-widget-desc">' . wp_kses_post( wpautop( $instance['content'], true ) ) . '</div>';
+			$instance['content'] = apply_filters( 'prisma_core_dynamic_strings', $instance['content'] );
+			echo '<div class="pc-custom-list-widget-desc">' . wp_kses_post( wpautop( $instance['content'], true ) ) . '</div>';
 		}
 
 		if ( ! empty( $instance['items'] ) ) {
 
-			echo '<div class="si-custom-list-widget-items">';
+			echo '<div class="pc-custom-list-widget-items">';
 
 			foreach ( $instance['items'] as $entry ) {
 
-				$separator_class = $entry['separator'] ? 'si-clw-sep ' : '';
+				$separator_class = $entry['separator'] ? 'pc-clw-sep ' : '';
 
-				echo '<div class="' . $separator_class . 'si-custom-list-widget-item">';
+				echo '<div class="' . $separator_class . 'pc-custom-list-widget-item">';
 
 				if ( $entry['icon'] ) {
 
 					$entry['icon'] = $this->process_icon( $entry['icon'] );
 
 					if ( false !== strpos( $entry['icon'], '<svg' ) ) {
-						echo wp_kses( $entry['icon'], sinatra_get_allowed_html_tags( 'svg' ) );
+						echo wp_kses( $entry['icon'], prisma_core_get_allowed_html_tags( 'svg' ) );
 					} else {
-						echo '<i class="si-widget-icon ' . esc_attr( $entry['icon'] ) . '" aria-hidden="true"></i>';
+						echo '<i class="pc-widget-icon ' . esc_attr( $entry['icon'] ) . '" aria-hidden="true"></i>';
 					}
 				}
 
 				if ( $entry['description'] ) {
-					echo '<span class="si-entry">' . wp_kses_post( nl2br( $entry['description'] ) ) . '</span>';
+					echo '<span class="pc-entry">' . wp_kses_post( nl2br( $entry['description'] ) ) . '</span>';
 				}
 
 				echo '</div>';
@@ -108,7 +108,7 @@ class Sinatra_Core_Custom_List_Widget extends WP_Widget {
 			echo '</div>';
 		}
 
-		do_action( 'sinatra_after_custom_list_widget', $instance );
+		do_action( 'prisma_core_after_custom_list_widget', $instance );
 
 		echo wp_kses_post( $args['after_widget'] );
 	}
@@ -140,7 +140,7 @@ class Sinatra_Core_Custom_List_Widget extends WP_Widget {
 				);
 
 				if ( isset( $entry['icon'] ) ) {
-					$new_entry['icon'] = wp_kses( $this->process_icon( $entry['icon'] ), sinatra_get_allowed_html_tags( 'svg' ) );
+					$new_entry['icon'] = wp_kses( $this->process_icon( $entry['icon'] ), prisma_core_get_allowed_html_tags( 'svg' ) );
 				}
 
 
@@ -167,27 +167,27 @@ class Sinatra_Core_Custom_List_Widget extends WP_Widget {
 		$empty    = empty( $instance['items'] ) ? ' empty' : '';
 		?>
 
-		<div class="si-repeatable-widget si-custom-list-widget si-widget">
+		<div class="pc-repeatable-widget pc-custom-list-widget pc-widget">
 			<p>
 				<label for="<?php echo $this->get_field_id( 'title' ); ?>">
-					<?php _ex( 'Title:', 'Widget', 'sinatra' ); ?>
+					<?php _ex( 'Title:', 'Widget', 'prisma-core' ); ?>
 				</label>
 				<input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" class="widefat"/>
 			</p>
 
 			<p>
 				<label for="<?php echo $this->get_field_id( 'content' ); ?>">
-					<?php _ex( 'Text Before:', 'Widget', 'sinatra' ); ?>
+					<?php _ex( 'Text Before:', 'Widget', 'prisma-core' ); ?>
 				</label>
 				
 				<textarea class="widefat" id="<?php echo $this->get_field_id( 'content' ); ?>" name="<?php echo $this->get_field_name( 'content' ); ?>" rows="3"><?php echo $instance['content']; ?></textarea>
 
-				<em class="description si-description">
+				<em class="description pc-description">
 					<?php
 					echo wp_kses_post(
 						sprintf(
-							_x( 'HTML tags and %1$sdynamic strings%2$s allowed.', 'Widget', 'sinatra' ),
-							'<a href="https://sinatrawp.com/docs/sinatra-dynamic-strings/" rel="nofollow noreferrer" target="_blank">',
+							_x( 'HTML tags and %1$sdynamic strings%2$s allowed.', 'Widget', 'prisma-core' ),
+							'<a href="https://github.com/ciorici/prisma-core/docs/prisma-dynamic-strings/" rel="nofollow noreferrer" target="_blank">',
 							'</a>'
 						)
 					);
@@ -195,54 +195,54 @@ class Sinatra_Core_Custom_List_Widget extends WP_Widget {
 				</em>
 			</p>
 
-			<div class="si-repeatable-container<?php echo esc_attr( $empty ); ?>">
+			<div class="pc-repeatable-container<?php echo esc_attr( $empty ); ?>">
 
 				<?php
 				if ( ! empty( $instance['items'] ) ) {
 					foreach ( $instance['items'] as $index => $entry ) {
 						?>
-						<div class="si-repeatable-item">
+						<div class="pc-repeatable-item">
 							
 							<!-- Repeatable title -->
-							<div class="si-repeatable-item-title">
+							<div class="pc-repeatable-item-title">
 								<?php
-								_ex( 'List Item', 'Widget', 'sinatra' );
+								_ex( 'List Item', 'Widget', 'prisma-core' );
 
 								if ( ! empty( $entry['description'] ) ) {
 									echo ': <span class="in-widget-title">' . esc_html( wp_trim_words( $entry['description'], 2, '...' ) ) . '</span>';
 								}
 								?>
 
-								<div class="si-repeatable-indicator">
+								<div class="pc-repeatable-indicator">
 									<span class="accordion-section-title" aria-hidden="true"></span>
 								</div>
 							</div>
 							
 							<!-- Repeatable content -->
-							<div class="si-repeatable-item-content">
+							<div class="pc-repeatable-item-content">
 								
 								<p>
 									<label for="<?php echo $this->get_field_id( 'items' ) . '-' . $index . '-icon'; ?>">
-										<?php _ex( 'Icon', 'Widget', 'sinatra' ); ?>
+										<?php _ex( 'Icon', 'Widget', 'prisma-core' ); ?>
 									</label>
 									
 									<textarea class="widefat" id="<?php echo $this->get_field_id( 'icon' ) . '-' . $index . '-icon'; ?>" name="<?php echo $this->get_field_name( 'items' ); ?>[<?php echo $index; ?>][icon]" rows="3"><?php echo $entry['icon']; ?></textarea>
-									<em class="description si-description">
-										<?php echo wp_kses_post( _x( 'Enter icon SVG code.', 'Widget', 'sinatra' ) ); ?>
+									<em class="description pc-description">
+										<?php echo wp_kses_post( _x( 'Enter icon SVG code.', 'Widget', 'prisma-core' ) ); ?>
 									</em>
 								</p>
 								
 								<p>
 									<label for="<?php echo $this->get_field_id( 'items' ) . '-' . $index . '-description'; ?>">
-										<?php _ex( 'Item Description', 'Widget', 'sinatra' ); ?>
+										<?php _ex( 'Item Description', 'Widget', 'prisma-core' ); ?>
 									</label>
 									<textarea class="widefat" id="<?php echo $this->get_field_id( 'items' ) . '-' . $index . '-description'; ?>" name="<?php echo $this->get_field_name( 'items' ); ?>[<?php echo $index; ?>][description]" rows="3"><?php echo $entry['description']; ?></textarea>
-									<em class="description si-description">
+									<em class="description pc-description">
 										<?php
 										echo wp_kses_post(
 											sprintf(
-												_x( 'HTML tags and %1$sdynamic strings%2$s allowed.', 'Widget', 'sinatra' ),
-												'<a href="https://sinatrawp.com/docs/sinatra-dynamic-strings/" rel="nofollow noreferrer" target="_blank">',
+												_x( 'HTML tags and %1$sdynamic strings%2$s allowed.', 'Widget', 'prisma-core' ),
+												'<a href="https://github.com/ciorici/prisma-core/docs/prisma-dynamic-strings/" rel="nofollow noreferrer" target="_blank">',
 												'</a>'
 											)
 										);
@@ -252,11 +252,11 @@ class Sinatra_Core_Custom_List_Widget extends WP_Widget {
 
 								<p>
 									<input type="checkbox" id="<?php echo $this->get_field_name( 'items' ); ?>[<?php echo $index; ?>][separator]" name="<?php echo $this->get_field_name( 'items' ); ?>[<?php echo $index; ?>][separator]" <?php checked( true, $entry['separator'] ); ?>/>
-									<label for="<?php echo $this->get_field_name( 'items' ); ?>[<?php echo $index; ?>][separator]"><?php _ex( 'Add bottom separator', 'Widget', 'sinatra' ); ?></label>
+									<label for="<?php echo $this->get_field_name( 'items' ); ?>[<?php echo $index; ?>][separator]"><?php _ex( 'Add bottom separator', 'Widget', 'prisma-core' ); ?></label>
 								</p>
 
 								<!-- Remove -->
-								<button type="button" class="remove-repeatable-item button-link button-link-delete"><?php _ex( 'Remove', 'Widget', 'sinatra' ); ?></button>
+								<button type="button" class="remove-repeatable-item button-link button-link-delete"><?php _ex( 'Remove', 'Widget', 'prisma-core' ); ?></button>
 							</div>
 
 						</div>
@@ -265,50 +265,50 @@ class Sinatra_Core_Custom_List_Widget extends WP_Widget {
 				}
 				?>
 
-				<div class="si-svg-icon si-hide-if-not-empty">
+				<div class="pc-svg-icon pc-hide-if-not-empty">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="8"></line></svg>
 				</div>
 
-				<h5 class="si-hide-if-not-empty">
-					<?php _ex( 'No Items Found', 'Widget', 'sinatra' ); ?>
+				<h5 class="pc-hide-if-not-empty">
+					<?php _ex( 'No Items Found', 'Widget', 'prisma-core' ); ?>
 				</h5>
 
-				<p class="si-hide-if-not-empty">
-					<?php _ex( 'Please add new items to see more options', 'Widget', 'sinatra' ); ?>
+				<p class="pc-hide-if-not-empty">
+					<?php _ex( 'Please add new items to see more options', 'Widget', 'prisma-core' ); ?>
 				</p>
 
-				<div class="si-repeatable-footer">
-					<a href="#" class="button secondary add-new-item" data-index="<?php echo intval( count( $instance['items'] ) ); ?>" data-widget-name="<?php echo $this->get_field_name( 'items' ); ?>" data-widget-id="<?php echo $this->get_field_id( 'items' ); ?>"><?php esc_html_e( 'Add New', 'sinatra' ); ?></a>
+				<div class="pc-repeatable-footer">
+					<a href="#" class="button secondary add-new-item" data-index="<?php echo intval( count( $instance['items'] ) ); ?>" data-widget-name="<?php echo $this->get_field_name( 'items' ); ?>" data-widget-id="<?php echo $this->get_field_id( 'items' ); ?>"><?php esc_html_e( 'Add New', 'prisma-core' ); ?></a>
 				</div>
 			</div>
-			<!-- END .si-repeatable-container -->
+			<!-- END .pc-repeatable-container -->
 
 			<?php
-			if ( function_exists( 'sinatra_help_link' ) ) {
-				sinatra_help_link(
+			if ( function_exists( 'prisma_core_help_link' ) ) {
+				prisma_core_help_link(
 					array(
-						'link' => 'https://sinatrawp.com/docs/custom-list-widget/',
+						'link' => 'https://github.com/ciorici/prisma-core/docs/custom-list-widget/',
 					)
 				);
 			}
 			?>
 
 		</div>
-		<!-- END .si-custom-list-widget -->
+		<!-- END .pc-custom-list-widget -->
 
 		<?php
 	}
 
 	/**
-	 * Hook into Sinatra dynamic styles.
+	 * Hook into Prisma Core dynamic styles.
 	 *
 	 * @param  string $css Generated CSS code.
 	 * @return string Modified CSS code.
 	 */
 	function dynamic_styles( $css ) {
-		$css .= '.sinatra-core-custom-list-widget .si-icon, .sinatra-core-custom-list-widget svg {
-			fill: ' . sinatra_option( 'accent_color' ) . ';
-			color: ' . sinatra_option( 'accent_color' ) . ';
+		$css .= '.prisma-companion-custom-list-widget .pc-icon, .prisma-companion-custom-list-widget svg {
+			fill: ' . prisma_core_option( 'accent_color' ) . ';
+			color: ' . prisma_core_option( 'accent_color' ) . ';
 		}';
 
 		return $css;
@@ -319,17 +319,17 @@ class Sinatra_Core_Custom_List_Widget extends WP_Widget {
 		// Icon is not an SVG.
 		if ( false === strpos( $icon, '<svg' ) ) {
 
-			if ( version_compare( SINATRA_THEME_VERSION, '1.2.0', '>=' ) ) {
+			if ( version_compare( PRISMA_CORE_THEME_VERSION, '1.2.0', '>=' ) ) {
 
-				$_icon = trim( str_replace( 'si-icon', '', $icon ) );
-				$_icon = trim( str_replace( 'si-', '', $_icon ) );
+				$_icon = trim( str_replace( 'pc-icon', '', $icon ) );
+				$_icon = trim( str_replace( 'pc-', '', $_icon ) );
 
-				$svg_icon = sinatra()->icons->get_svg( $_icon );
+				$svg_icon = prisma_core()->icons->get_svg( $_icon );
 
 				if ( $svg_icon ) {
 					$icon = $svg_icon;
-				} elseif ( file_exists( SINATRA_CORE_PLUGIN_DIR . '/assets/svg/' . $_icon . '.svg'  ) ) {
-					$icon = file_get_contents( SINATRA_CORE_PLUGIN_DIR . '/assets/svg/' . $_icon . '.svg' );
+				} elseif ( file_exists( PRISMA_COMPANION_PLUGIN_DIR . '/assets/svg/' . $_icon . '.svg'  ) ) {
+					$icon = file_get_contents( PRISMA_COMPANION_PLUGIN_DIR . '/assets/svg/' . $_icon . '.svg' );
 				}
 			}
 		}

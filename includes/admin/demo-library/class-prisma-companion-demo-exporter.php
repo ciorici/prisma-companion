@@ -1,9 +1,9 @@
 <?php
 /**
- * Sinatra Demo Library. Install a copy of a Sinatra demo to your website.
+ * Prisma Companion Demo Library. Install a copy of a Prisma Core demo to your website.
  *
- * @package Sinatra Core
- * @author  Sinatra Team <hello@sinatrawp.com>
+ * @package Prisma Companion
+ * @author  Prisma Core Team
  * @since   1.0.0
  */
 
@@ -13,12 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Sinatra Demo Exporter Class.
+ * Prisma Companion Demo Exporter Class.
  *
  * @since 1.0.0
- * @package Sinatra Core
+ * @package Prisma Companion
  */
-final class Sinatra_Demo_Exporter {
+final class Prisma_Companion_Demo_Exporter {
 
 	/**
 	 * Singleton instance of the class.
@@ -37,14 +37,14 @@ final class Sinatra_Demo_Exporter {
 	public $demo_id;
 
 	/**
-	 * Main Sinatra Demo Exporter Instance.
+	 * Main Prisma Companion Demo Exporter Instance.
 	 *
 	 * @since 1.0.0
-	 * @return Sinatra_Demo_Exporter
+	 * @return Prisma_Companion_Demo_Exporter
 	 */
 	public static function instance() {
 
-		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Sinatra_Demo_Exporter ) ) {
+		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Prisma_Companion_Demo_Exporter ) ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -75,46 +75,46 @@ final class Sinatra_Demo_Exporter {
 		}
 
 		// Export Customizer.
-		if ( isset( $_REQUEST['sinatra-core-customizer-export'] ) ) { // phpcs:ignore
+		if ( isset( $_REQUEST['prisma-companion-customizer-export'] ) ) { // phpcs:ignore
 
-			if ( ! class_exists( 'Sinatra_Customizer_Import_Export' ) ) {
+			if ( ! class_exists( 'Prisma_Companion_Customizer_Import_Export' ) ) {
 
 				$class_customizer_import = plugin_dir_path( __FILE__ ) . 'importers/class-customizer-import-export.php';
 
 				if ( file_exists( $class_customizer_import ) ) {
 					require_once $class_customizer_import;
 
-					Sinatra_Customizer_Import_Export::export();
+					Prisma_Companion_Customizer_Import_Export::export();
 				}
 			}
 		}
 
 		// Export Widgets.
-		if ( isset( $_REQUEST['sinatra-core-widgets-export'] ) ) { // phpcs:ignore
+		if ( isset( $_REQUEST['prisma-companion-widgets-export'] ) ) { // phpcs:ignore
 
-			if ( ! class_exists( 'Sinatra_Widgets_Import_Export' ) ) {
+			if ( ! class_exists( 'Prisma_Companion_Widgets_Import_Export' ) ) {
 
 				$class_widgets_import = plugin_dir_path( __FILE__ ) . 'importers/class-widgets-import-export.php';
 
 				if ( file_exists( $class_widgets_import ) ) {
 					require_once $class_widgets_import;
 
-					Sinatra_Widgets_Import_Export::export();
+					Prisma_Companion_Widgets_Import_Export::export();
 				}
 			}
 		}
 
 		// Export Options.
-		if ( isset( $_REQUEST['sinatra-core-options-export'] ) ) { // phpcs:ignore
+		if ( isset( $_REQUEST['prisma-companion-options-export'] ) ) { // phpcs:ignore
 
-			if ( ! class_exists( 'Sinatra_Options_Import_Export' ) ) {
+			if ( ! class_exists( 'Prisma_Companion_Options_Import_Export' ) ) {
 
 				$class_options_import = plugin_dir_path( __FILE__ ) . 'importers/class-options-import-export.php';
 
 				if ( file_exists( $class_options_import ) ) {
 					require_once $class_options_import;
 
-					Sinatra_Options_Import_Export::export();
+					Prisma_Companion_Options_Import_Export::export();
 				}
 			}
 		}
@@ -122,18 +122,18 @@ final class Sinatra_Demo_Exporter {
 }
 
 /**
- * The function which returns the one Sinatra_Demo_Exporter instance.
+ * The function which returns the one Prisma_Companion_Demo_Exporter instance.
  *
  * Use this function like you would a global variable, except without needing
  * to declare the global.
  *
- * Example: <?php $sinatra_demo_exporter = sinatra_demo_exporter(); ?>
+ * Example: <?php $prisma_companion_demo_exporter = prisma_companion_demo_exporter(); ?>
  *
  * @since 1.0.0
  * @return object
  */
-function sinatra_demo_exporter() {
-	return Sinatra_Demo_Exporter::instance();
+function prisma_companion_demo_exporter() {
+	return Prisma_Companion_Demo_Exporter::instance();
 }
 
-sinatra_demo_exporter();
+prisma_companion_demo_exporter();

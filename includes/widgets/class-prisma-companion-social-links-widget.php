@@ -1,12 +1,12 @@
 <?php
 /**
- * Sinatra Core: Social Links widget.
+ * Prisma Companion: Social Links widget.
  *
- * @package     Sinatra Core
- * @author      Sinatra Team <hello@sinatrawp.com>
+ * @package     Prisma Companion
+ * @author      Prisma Core Team
  * @since       1.0.0
  */
-class Sinatra_Core_Social_Links_Widget extends WP_Widget {
+class Prisma_Companion_Social_Links_Widget extends WP_Widget {
 
 	/**
 	 * Holds widget settings defaults, populated in constructor.
@@ -29,16 +29,16 @@ class Sinatra_Core_Social_Links_Widget extends WP_Widget {
 			'nav_menu' => '',
 			'style'    => '',
 			'align'    => '',
-			'size'     => 'si-standard',
+			'size'     => 'pc-standard',
 		);
 
 		// Widget Slug.
-		$widget_slug = 'sinatra-core-social-links-widget';
+		$widget_slug = 'prisma-companion-social-links-widget';
 
 		// Widget basics.
 		$widget_ops = array(
 			'classname'   => $widget_slug,
-			'description' => _x( 'Displays a list of social icon links.', 'Widget', 'sinatra-core' ),
+			'description' => _x( 'Displays a list of social icon links.', 'Widget', 'prisma-companion' ),
 		);
 
 		// Widget controls.
@@ -47,7 +47,7 @@ class Sinatra_Core_Social_Links_Widget extends WP_Widget {
 		);
 
 		// Load widget.
-		parent::__construct( $widget_slug, _x( '[Sinatra] Social Links', 'Widget', 'sinatra-core' ), $widget_ops, $control_ops );
+		parent::__construct( $widget_slug, _x( '[Prisma] Social Links', 'Widget', 'prisma-companion' ), $widget_ops, $control_ops );
 
 	}
 
@@ -65,7 +65,7 @@ class Sinatra_Core_Social_Links_Widget extends WP_Widget {
 
 		echo wp_kses_post( $args['before_widget'] );
 
-		do_action( 'sinatra_before_social_links_widget', $instance );
+		do_action( 'prisma_core_before_social_links_widget', $instance );
 
 		// Title.
 		if ( ! empty( $instance['title'] ) ) {
@@ -84,12 +84,12 @@ class Sinatra_Core_Social_Links_Widget extends WP_Widget {
 				'size'  => $instance['size'],
 			);
 
-			$nav_menu_args = apply_filters( 'sinatra_social_links_widget_nav_menu_args', $nav_menu_args, $nav_menu, $args, $instance );
+			$nav_menu_args = apply_filters( 'prisma_core_social_links_widget_nav_menu_args', $nav_menu_args, $nav_menu, $args, $instance );
 
-			sinatra_social_links( $nav_menu_args );
+			prisma_core_social_links( $nav_menu_args );
 		}
 
-		do_action( 'sinatra_after_social_links_widget', $instance );
+		do_action( 'prisma_core_after_social_links_widget', $instance );
 
 		echo wp_kses_post( $args['after_widget'] );
 	}
@@ -133,10 +133,10 @@ class Sinatra_Core_Social_Links_Widget extends WP_Widget {
 		$menus = wp_get_nav_menus();
 
 		?>
-		<div class="si-social-links-widget si-widget">
+		<div class="pc-social-links-widget pc-widget">
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
-					<?php echo esc_html_x( 'Title:', 'Widget', 'sinatra-core' ); ?>
+					<?php echo esc_html_x( 'Title:', 'Widget', 'prisma-companion' ); ?>
 				</label>
 				<input type="text"
 						id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
@@ -146,11 +146,11 @@ class Sinatra_Core_Social_Links_Widget extends WP_Widget {
 
 			<p>	
 				<label for="<?php echo $this->get_field_id( 'nav_menu' ); ?>">
-					<?php _ex( 'Menu:', 'Widget', 'sinatra-core' ); ?>
+					<?php _ex( 'Menu:', 'Widget', 'prisma-companion' ); ?>
 				</label>
 
 				<select id="<?php echo $this->get_field_id( 'nav_menu' ); ?>" name="<?php echo $this->get_field_name( 'nav_menu' ); ?>">
-					<option value="0"><?php _ex( '&mdash; Select &mdash;', 'Widget', 'sinatra-core' ); ?></option>
+					<option value="0"><?php _ex( '&mdash; Select &mdash;', 'Widget', 'prisma-companion' ); ?></option>
 					
 					<?php if ( ! empty( $menus ) ) { ?>
 						<?php foreach ( $menus as $menu ) { ?>
@@ -164,43 +164,43 @@ class Sinatra_Core_Social_Links_Widget extends WP_Widget {
 
 			<p>	
 				<label for="<?php echo $this->get_field_id( 'style' ); ?>">
-					<?php _ex( 'Style:', 'Widget', 'sinatra-core' ); ?>
+					<?php _ex( 'Style:', 'Widget', 'prisma-companion' ); ?>
 				</label>
 
 				<select id="<?php echo $this->get_field_id( 'style' ); ?>" name="<?php echo $this->get_field_name( 'style' ); ?>">
-					<option value="minimal" <?php selected( $instance['style'], 'minimal' ); ?>><?php _ex( 'Minimal', 'Widget', 'sinatra-core' ); ?></option>
-					<option value="rounded" <?php selected( $instance['style'], 'rounded' ); ?>><?php _ex( 'Rounded', 'Widget', 'sinatra-core' ); ?></option>
+					<option value="minimal" <?php selected( $instance['style'], 'minimal' ); ?>><?php _ex( 'Minimal', 'Widget', 'prisma-companion' ); ?></option>
+					<option value="rounded" <?php selected( $instance['style'], 'rounded' ); ?>><?php _ex( 'Rounded', 'Widget', 'prisma-companion' ); ?></option>
 				</select>
 			</p>
 
 			<p>	
 				<label for="<?php echo $this->get_field_id( 'style' ); ?>">
-					<?php _ex( 'Align:', 'Widget', 'sinatra-core' ); ?>
+					<?php _ex( 'Align:', 'Widget', 'prisma-companion' ); ?>
 				</label>
 
 				<select id="<?php echo $this->get_field_id( 'align' ); ?>" name="<?php echo $this->get_field_name( 'align' ); ?>">
-					<option value="si-flex-justify-start" <?php selected( $instance['align'], 'si-flex-justify-start' ); ?>><?php _ex( 'Left', 'Widget', 'sinatra-core' ); ?></option>
-					<option value="si-flex-justify-center" <?php selected( $instance['align'], 'si-flex-justify-center' ); ?>><?php _ex( 'Center', 'Widget', 'sinatra-core' ); ?></option>
-					<option value="si-flex-justify-end" <?php selected( $instance['align'], 'si-flex-justify-end' ); ?>><?php _ex( 'Right', 'Widget', 'sinatra-core' ); ?></option>
+					<option value="pc-flex-justify-start" <?php selected( $instance['align'], 'pc-flex-justify-start' ); ?>><?php _ex( 'Left', 'Widget', 'prisma-companion' ); ?></option>
+					<option value="pc-flex-justify-center" <?php selected( $instance['align'], 'pc-flex-justify-center' ); ?>><?php _ex( 'Center', 'Widget', 'prisma-companion' ); ?></option>
+					<option value="pc-flex-justify-end" <?php selected( $instance['align'], 'pc-flex-justify-end' ); ?>><?php _ex( 'Right', 'Widget', 'prisma-companion' ); ?></option>
 				</select>
 			</p>
 
 			<p>	
 				<label for="<?php echo $this->get_field_id( 'size' ); ?>">
-					<?php _ex( 'Size:', 'Widget', 'sinatra-core' ); ?>
+					<?php _ex( 'Size:', 'Widget', 'prisma-companion' ); ?>
 				</label>
 
 				<select id="<?php echo $this->get_field_id( 'size' ); ?>" name="<?php echo $this->get_field_name( 'size' ); ?>">
-					<option value="si-small" <?php selected( $instance['size'], 'si-small' ); ?>><?php _ex( 'Small', 'Widget', 'sinatra-core' ); ?></option>
-					<option value="si-standard" <?php selected( $instance['size'], 'si-standard' ); ?>><?php _ex( 'Standard', 'Widget', 'sinatra-core' ); ?></option>
-					<option value="si-large" <?php selected( $instance['size'], 'si-large' ); ?>><?php _ex( 'Large', 'Widget', 'sinatra-core' ); ?></option>
-					<option value="si-xlarge" <?php selected( $instance['size'], 'si-xlarge' ); ?>><?php _ex( 'Extra Large', 'Widget', 'sinatra-core' ); ?></option>
+					<option value="pc-small" <?php selected( $instance['size'], 'pc-small' ); ?>><?php _ex( 'Small', 'Widget', 'prisma-companion' ); ?></option>
+					<option value="pc-standard" <?php selected( $instance['size'], 'pc-standard' ); ?>><?php _ex( 'Standard', 'Widget', 'prisma-companion' ); ?></option>
+					<option value="pc-large" <?php selected( $instance['size'], 'pc-large' ); ?>><?php _ex( 'Large', 'Widget', 'prisma-companion' ); ?></option>
+					<option value="pc-xlarge" <?php selected( $instance['size'], 'pc-xlarge' ); ?>><?php _ex( 'Extra Large', 'Widget', 'prisma-companion' ); ?></option>
 				</select>
 			</p>
 
 			<?php
-			if ( function_exists( 'sinatra_help_link' ) ) {
-				sinatra_help_link( array( 'link' => 'https://sinatrawp.com/docs/social-links-widget/' ) );
+			if ( function_exists( 'prisma_core_help_link' ) ) {
+				prisma_core_help_link( array( 'link' => 'https://github.com/ciorici/prisma-core/docs/social-links-widget/' ) );
 			}
 			?>
 
