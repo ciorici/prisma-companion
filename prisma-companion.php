@@ -59,7 +59,7 @@ if ( ! class_exists( 'Prisma_Companion' ) ) {
 		 * @since 1.0.0
 		 * @var sting
 		 */
-		public $version = '1.0.5';
+		public $version = '2.0.0';
 
 		/**
 		 * Main Prisma Companion Instance.
