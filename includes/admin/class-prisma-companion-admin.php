@@ -264,7 +264,7 @@ final class Prisma_Companion_Admin {
 		if ( false === $remote ) {
 
 			$response = wp_remote_get(
-				'https://prisma.wpzoom.com/plugins.json',
+				'https://prisma.wpzoom.com/demos/plugins.json',
 				array(
 					'user-agent' => 'PrismaCore/' . PRISMA_CORE_THEME_VERSION . ';',
 					'timeout'    => 10,
