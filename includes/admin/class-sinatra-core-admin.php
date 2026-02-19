@@ -248,7 +248,7 @@ final class Sinatra_Core_Admin {
 	 */
 	public function theme_required_notice() {
 
-		echo '<div class="notice notice-warning"><p>' . esc_html__( 'Sinatra Theme needs to be installed and activated in order to use Sinatra Core plugin.', 'sinatra-core' ) . ' <a href="' . esc_url( admin_url( 'themes.php' ) ) . '"><strong>' . esc_html__( 'Install & Activate', 'sinatra-core' ) . '</strong></a>.</p></div>';
+		echo '<div class="notice notice-warning"><p>' . esc_html__( 'Sinatra or Prisma Core theme needs to be installed and activated in order to use Sinatra Core plugin.', 'sinatra-core' ) . ' <a href="' . esc_url( admin_url( 'themes.php' ) ) . '"><strong>' . esc_html__( 'Install & Activate', 'sinatra-core' ) . '</strong></a>.</p></div>';
 	}
 
 	/**
@@ -267,19 +267,24 @@ final class Sinatra_Core_Admin {
 				'https://sinatrawp.com/wp-json/api/v1/plugins',
 				array(
 					'user-agent' => 'Sinatra/' . SINATRA_THEME_VERSION . ';',
-					'timeout'    => 60,
+					'timeout'    => 10,
 				)
 			);
 
 			if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-				set_site_transient( 'sinatra_check_plugin_update', 'error', 60 * 60 * 6 );
-				return;
+				set_site_transient( 'sinatra_check_plugin_update', 'error', 60 * 60 * 24 * 30 );
+				return $plugins;
 			}
 
-			$body    = wp_remote_retrieve_body( $response );
-			$plugins = json_decode( $body, true );
+			$body   = wp_remote_retrieve_body( $response );
+			$remote = json_decode( $body, true );
 
-			set_site_transient( 'sinatra_check_plugin_update', $plugins, 60 * 60 * 24 * 3 );
+			if ( is_array( $remote ) && ! empty( $remote ) ) {
+				$plugins = $remote;
+				set_site_transient( 'sinatra_check_plugin_update', $plugins, 60 * 60 * 24 * 3 );
+			} else {
+				set_site_transient( 'sinatra_check_plugin_update', 'error', 60 * 60 * 24 * 30 );
+			}
 		} elseif ( 'error' === $remote ) {
 			return $plugins;
 		} else {

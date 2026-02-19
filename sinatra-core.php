@@ -170,7 +170,8 @@ if ( ! class_exists( 'Sinatra_Core' ) ) {
 
 	$theme = wp_get_theme();
 
-	if ( 'Sinatra' === $theme->name || 'sinatra' === $theme->template ) {
+	if ( 'Sinatra' === $theme->name || 'sinatra' === $theme->template ||
+		'Prisma Core' === $theme->name || 'prisma-core' === $theme->template ) {
 		sinatra_core();
 	} else {
 		add_action( 'admin_notices', 'sinatra_core_theme_notice' );
@@ -182,6 +183,6 @@ if ( ! class_exists( 'Sinatra_Core' ) ) {
 	 * @since 1.0.0
 	 */
 	function sinatra_core_theme_notice() {
-		echo '<div class="notice notice-warning"><p>' . __( 'Please activate Sinatra Theme before activating Sinatra Core.', 'sinatra-core' ) . '</p></div>';
+		echo '<div class="notice notice-warning"><p>' . __( 'Please activate Sinatra or Prisma Core theme before activating Sinatra Core.', 'sinatra-core' ) . '</p></div>';
 	}
 }
