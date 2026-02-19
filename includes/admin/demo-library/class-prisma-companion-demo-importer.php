@@ -58,7 +58,7 @@ final class Prisma_Companion_Demo_Importer {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	public $remote = 'https://github.com/ciorici/prisma-core/raw/main/assets/demos/';
+	public $remote = 'https://prisma.wpzoom.com/demos/';
 
 	/**
 	 * Main Prisma Companion Demo Importer Instance.

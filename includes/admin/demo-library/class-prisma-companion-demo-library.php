@@ -174,7 +174,7 @@ final class Prisma_Companion_Demo_Library {
 		if ( false === $this->templates ) {
 
 			$response = wp_remote_get(
-				'https://github.com/ciorici/prisma-core/wp-json/api/v1/demos',
+				'https://prisma.wpzoom.com/demos.json',
 				array(
 					'user-agent' => 'PrismaCore/' . PRISMA_CORE_THEME_VERSION . ';',
 					'timeout'    => 60,
