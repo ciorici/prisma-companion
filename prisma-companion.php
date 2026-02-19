@@ -57,9 +57,9 @@ if ( ! class_exists( 'Prisma_Companion' ) ) {
 		 * Plugin version for enqueueing, etc.
 		 *
 		 * @since 1.0.0
-		 * @var sting
+		 * @var string
 		 */
-		public $version = '2.0.0';
+		public $version = '';
 
 		/**
 		 * Main Prisma Companion Instance.
@@ -93,8 +93,13 @@ if ( ! class_exists( 'Prisma_Companion' ) ) {
 		 */
 		private function constants() {
 
-			// Plugin version.
+			// Plugin version — read from the plugin header so there's a single source of truth.
 			if ( ! defined( 'PRISMA_COMPANION_VERSION' ) ) {
+				if ( ! function_exists( 'get_plugin_data' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/plugin.php';
+				}
+				$plugin_data   = get_plugin_data( __FILE__, false, false );
+				$this->version = $plugin_data['Version'];
 				define( 'PRISMA_COMPANION_VERSION', $this->version );
 			}
 

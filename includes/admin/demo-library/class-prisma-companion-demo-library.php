@@ -65,7 +65,7 @@ final class Prisma_Companion_Demo_Library {
 	 */
 	public function __construct() {
 
-		$this->version = defined( PRISMA_COMPANION_VERSION ) ? PRISMA_COMPANION_VERSION : $this->version;
+		$this->version = PRISMA_COMPANION_VERSION;
 
 		$this->includes();
 		$this->hooks();
